@@ -34,7 +34,17 @@ export default function Home() {
           <li><a href="#stack">Стек</a></li>
           <li><a href="#contact" className="nav-cta">Написать</a></li>
         </ul>
+        <button className="nav-burger" id="navBurger" aria-label="Открыть меню">
+          <span /><span /><span />
+        </button>
       </nav>
+      <div className="mobile-menu" id="mobileMenu">
+        <a href="#about" className="mobile-link">О себе</a>
+        <a href="#skills" className="mobile-link">Навыки</a>
+        <a href="#projects" className="mobile-link">Проекты</a>
+        <a href="#stack" className="mobile-link">Стек</a>
+        <a href="#contact" className="mobile-link mobile-cta">Написать</a>
+      </div>
 
       {/* ── HERO ── */}
       <section id="hero">
@@ -55,9 +65,9 @@ export default function Home() {
           <a href="#contact" className="btn btn-ghost">Написать мне</a>
         </div>
         <div className="hero-stats reveal d3 visible">
-          <div className="hstat"><span className="hstat-num">6+</span><span className="hstat-label">Лет опыта</span></div>
-          <div className="hstat"><span className="hstat-num">34</span><span className="hstat-label">Проектов</span></div>
-          <div className="hstat"><span className="hstat-num">12</span><span className="hstat-label">Доменов</span></div>
+          <div className="hstat"><span className="hstat-num">4+</span><span className="hstat-label">Лет опыта</span></div>
+          <div className="hstat"><span className="hstat-num">15+</span><span className="hstat-label">Проектов</span></div>
+          <div className="hstat"><span className="hstat-num">8</span><span className="hstat-label">Доменов</span></div>
         </div>
       </section>
 
@@ -71,36 +81,38 @@ export default function Home() {
           <div className="about-grid">
             <div className="about-body reveal d1">
               <p>
-                <strong>Занимаюсь системным анализом бизнес-процессов</strong> — выявляю требования,
-                моделирую процессы и проектирую архитектуру аналитических решений.
-                Работаю на стыке бизнеса и технологий уже более шести лет.
+                <strong>Аналитик с 4 годами опыта</strong> в разработке и проектировании
+                сложных ИТ-систем. Прошёл путь от Frontend-разработчика до Fullstack-аналитика.
               </p>
               <p>
-                Умею переводить задачи с языка бизнеса на язык систем и обратно.
-                Считаю, что лучший аналитик — тот, кто задаёт правильные вопросы
-                до того, как начинает искать ответы.
+                Специализируюсь на глубокой технической аналитике (SA) и оптимизации
+                бизнес-процессов (BA). Эксперт в проектировании AI-решений, Fintech-продуктов
+                и высоконагруженных SaaS-платформ.
               </p>
               <p>
-                Вне работы — механические часы, архитектура, классические
-                автомобили и кофе со специями.
+                Вне работы — Mazda, Nissan, классические японские автомобили и хороший кофе.
               </p>
             </div>
             <div className="timeline-v2 reveal d2">
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
-                <div><div className="tv-year">2023 — н.в.</div><div className="tv-role">Senior Business Analyst</div><div className="tv-co">Sber · Digital Platforms</div></div>
+                <div><div className="tv-year">2025 — н.в.</div><div className="tv-role">Business Analyst</div><div className="tv-co">Purrweb · Outsourcing & Ventures</div></div>
               </div>
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
-                <div><div className="tv-year">2021 — 2023</div><div className="tv-role">Business Analyst</div><div className="tv-co">Tinkoff · Fintech Products</div></div>
+                <div><div className="tv-year">2025</div><div className="tv-role">Business Analyst</div><div className="tv-co">Т-Банк · Fintech Ecosystem</div></div>
               </div>
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
-                <div><div className="tv-year">2019 — 2021</div><div className="tv-role">Systems Analyst</div><div className="tv-co">X5 Group · Retail Tech</div></div>
+                <div><div className="tv-year">2024 — 2025</div><div className="tv-role">Fullstack Analyst (BA/SA)</div><div className="tv-co">Light4U · Automation & SaaS</div></div>
+              </div>
+              <div className="tv-item">
+                <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
+                <div><div className="tv-year">2023 — 2024</div><div className="tv-role">Business Analyst</div><div className="tv-co">Light4U · Digital Solutions</div></div>
               </div>
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /></div>
-                <div><div className="tv-year">2013 — 2017</div><div className="tv-role">Прикладная математика</div><div className="tv-co">НИУ ВШЭ</div></div>
+                <div><div className="tv-year">2021 — 2025</div><div className="tv-role">Информационные системы и программирование</div><div className="tv-co">ОмГУ им. Достоевского</div></div>
               </div>
             </div>
           </div>
@@ -167,30 +179,39 @@ export default function Home() {
           <div className="projects-list">
             <div className="proj-row reveal d1">
               <div className="pr-left">
-                <div className="pr-domain">Fintech · Sber</div>
-                <div className="pr-title">Автоматизация кредитного конвейера</div>
-                <div className="pr-desc">Полный реинжиниринг процесса выдачи кредитов физлицам. Цифровой путь от заявки до выдачи без участия операциониста. BPMN-модели, интеграция с бюро кредитных историй, скоринговыми системами и фронт-офисом.</div>
-                <div className="pr-chips"><span className="pr-chip">BPMN</span><span className="pr-chip">Kafka</span><span className="pr-chip">Oracle DB</span><span className="pr-chip">Jira</span></div>
+                <div className="pr-domain">Fintech · Tier-1 Enterprise</div>
+                <div className="pr-title">AI-инфраструктура кредитного скоринга</div>
+                <div className="pr-desc">Проектирование и внедрение предиктивных ML-моделей в банковский контур. Автоматизация цепочки принятия решений: от заявки до выдачи без участия операциониста. BPMN-модели, интеграция с БКИ и скоринговыми системами.</div>
+                <div className="pr-chips"><span className="pr-chip">MLOps</span><span className="pr-chip">System Design</span><span className="pr-chip">BPMN</span><span className="pr-chip">Kafka</span></div>
               </div>
-              <div className="pr-right"><div className="pr-metric-big">−68%</div><div className="pr-metric-label">Time-to-credit</div><div className="pr-arrow">↗</div></div>
+              <div className="pr-right"><div className="pr-metric-big">+24%</div><div className="pr-metric-label">Точность прогнозов</div><div className="pr-arrow">↗</div></div>
             </div>
             <div className="proj-row reveal d2">
               <div className="pr-left">
-                <div className="pr-domain">Retail · X5 Group</div>
-                <div className="pr-title">MDM — единое управление ассортиментом</div>
-                <div className="pr-desc">Проектирование мастер-системы управления данными для 200K+ SKU в омниканальной среде. Интеграция 14 систем-источников, построение единой модели данных, управление жизненным циклом товара.</div>
-                <div className="pr-chips"><span className="pr-chip">ArchiMate</span><span className="pr-chip">REST API</span><span className="pr-chip">Confluence</span><span className="pr-chip">OpenAPI</span></div>
+                <div className="pr-domain">AI & Security</div>
+                <div className="pr-title">Private LLM сервис с RAG-архитектурой</div>
+                <div className="pr-desc">Изолированная LLM-инфраструктура с векторным поиском по базе знаний 100K+ документов. Защита данных, zero-trust периметр, интеграция в корпоративный контур без утечки данных во внешние API.</div>
+                <div className="pr-chips"><span className="pr-chip">LLM</span><span className="pr-chip">RAG</span><span className="pr-chip">REST API</span><span className="pr-chip">OpenAPI</span></div>
               </div>
-              <div className="pr-right"><div className="pr-metric-big">14</div><div className="pr-metric-label">Систем интегрировано</div><div className="pr-arrow">↗</div></div>
+              <div className="pr-right"><div className="pr-metric-big">↑8×</div><div className="pr-metric-label">Скорость поиска</div><div className="pr-arrow">↗</div></div>
             </div>
             <div className="proj-row reveal d3">
               <div className="pr-left">
-                <div className="pr-domain">Analytics · Tinkoff</div>
-                <div className="pr-title">Data Governance платформа</div>
-                <div className="pr-desc">Построение архитектуры управления данными банка: каталог данных, data lineage, политики качества и классификации, ролевые модели. Охват 40+ доменов, рост качества данных в 4×.</div>
-                <div className="pr-chips"><span className="pr-chip">Collibra</span><span className="pr-chip">dbt</span><span className="pr-chip">SQL</span><span className="pr-chip">Python</span></div>
+                <div className="pr-domain">HealthCare · SaaS</div>
+                <div className="pr-title">CRM/ERP для сети стоматологий</div>
+                <div className="pr-desc">Полный цикл от Discovery до запуска: электронные карты пациентов, складской учёт, расчёт зарплат и графиков врачей, интеграция с ЕГИСЗ. Проект с нуля под 350+ клиник одновременно.</div>
+                <div className="pr-chips"><span className="pr-chip">ERP</span><span className="pr-chip">CRM</span><span className="pr-chip">SQL</span><span className="pr-chip">Confluence</span></div>
               </div>
-              <div className="pr-right"><div className="pr-metric-big">4×</div><div className="pr-metric-label">Рост качества данных</div><div className="pr-arrow">↗</div></div>
+              <div className="pr-right"><div className="pr-metric-big">350+</div><div className="pr-metric-label">Клиник на платформе</div><div className="pr-arrow">↗</div></div>
+            </div>
+            <div className="proj-row reveal d1">
+              <div className="pr-left">
+                <div className="pr-domain">LegalTech · Hybrid</div>
+                <div className="pr-title">Hybrid Compliance System</div>
+                <div className="pr-desc">Программно-аппаратный комплекс мониторинга соответствия требованиям. Интеграция IoT-датчиков и автоматизация отчётности. Снижение штрафных рисков на 40% по 50+ объектам.</div>
+                <div className="pr-chips"><span className="pr-chip">IoT</span><span className="pr-chip">Kafka</span><span className="pr-chip">BPMN</span><span className="pr-chip">Python</span></div>
+              </div>
+              <div className="pr-right"><div className="pr-metric-big">−40%</div><div className="pr-metric-label">Штрафные риски</div><div className="pr-arrow">↗</div></div>
             </div>
           </div>
         </div>

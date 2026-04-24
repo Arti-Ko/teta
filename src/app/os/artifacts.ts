@@ -22,10 +22,10 @@ export const FOLDERS: ArtifactFolder[] = [
 
 // Place files in public/artifacts/<folder>/ — name must match exactly.
 export const ARTIFACTS: Artifact[] = [
-  { name: "Тете.pdf",                             type: "pdf",  size: "232 KB", folder: "Спецификации" },
-  { name: "IT_Research_v2.docx",                  type: "docx", size: "36 KB",  folder: "Исследования" },
-  { name: "portfolio.html",                       type: "html", size: "40 KB",  folder: "Прочее"       },
-  { name: "2026-04-20 10-39-12.txt",              type: "txt",  size: "8 KB",   folder: "Прочее"       },
-  { name: "a2c917921dded297528115e18ddfa6c9.jpg", type: "jpg",  size: "76 KB",  folder: "Схемы"        },
-  { name: "Футбол - Frame 4 (1).jpg",             type: "jpg",  size: "1.2 MB", folder: "Схемы"        },
+  { name: "AI_Scoring_BRD.pdf",          type: "pdf",  size: "420 KB", folder: "Спецификации" },
+  { name: "LLM_RAG_Architecture.pdf",    type: "pdf",  size: "310 KB", folder: "Спецификации" },
+  { name: "BPMN_Credit_Pipeline.png",    type: "png",  size: "540 KB", folder: "Схемы"        },
+  { name: "Data_Governance_Model.png",   type: "png",  size: "380 KB", folder: "Схемы"        },
+  { name: "Fintech_IT_Research.docx",    type: "docx", size: "64 KB",  folder: "Исследования" },
+  { name: "SaaS_Discovery_Report.docx",  type: "docx", size: "48 KB",  folder: "Исследования" },
 ];

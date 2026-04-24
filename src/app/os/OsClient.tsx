@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import "./os.css";
 import { ARTIFACTS, FOLDERS } from "./artifacts";
@@ -16,12 +17,45 @@ interface WinState {
 const DEFAULTS: Record<string, WinState> = {
   profile:   { minimized: false, zIndex: 22, maxed: false, pos: { left: 60,  top: 52,  width: 420 } },
   skills:    { minimized: false, zIndex: 21, maxed: false, pos: { left: 500, top: 52,  width: 360 } },
-  projects:  { minimized: false, zIndex: 20, maxed: false, pos: { left: 60,  top: 450, width: 480, height: 350 } },
+  projects:  { minimized: false, zIndex: 20, maxed: false, pos: { left: 60,  top: 450, width: 520, height: 380 } },
   contact:   { minimized: false, zIndex: 19, maxed: false, pos: { left: 560, top: 430, width: 340 } },
   artifacts: { minimized: true,  zIndex: 18, maxed: false, pos: { left: 120, top: 60,  width: 680, height: 500 } },
 };
 
 const BOOT_LABELS = ["KERNEL LOADED", "PROFILE DATABASE", "SKILL INDEX", "PROJECT ARCHIVE", "INTERFACE READY"];
+
+const PROJECTS = [
+  { title: "АИ продукты для финтеха", domain: "Fintech", desc: "Автоматизация скоринга и оценки LTV корпоратов. Внедрение ML-моделей в банковский контур.", metrics: [["Точность", "+24%"], ["Decision time", "−40%"]] },
+  { title: "Private LLM сервис", domain: "AI & Security", desc: "Изолированная LLM-инфраструктура с RAG-архитектурой. Защита данных и поиск по базе знаний 100K+.", metrics: [["Data Privacy", "100%"], ["Search speed", "↑8×"]] },
+  { title: "Hybrid Compliance System", domain: "LegalTech", desc: "Программно-аппаратный комплекс мониторинга. Интеграция IoT-датчиков и автоматизация отчётности.", metrics: [["Штрафы", "−40%"], ["Объектов", "50+"]] },
+  { title: "Анонимизатор мед-данных", domain: "MedTech", desc: "NLP-сервис обезличивания ПДн в документах. Соответствие ФЗ-152 и международным стандартам.", metrics: [["Утечки", "0"], ["Accuracy", "99.8%"]] },
+  { title: "SaaS для горнолыжек и отелей", domain: "HoReCa", desc: "ERP-система: ски-пасс, бронирование, прокат. Логика динамического ценообразования.", metrics: [["RevPAR", "+18%"], ["Users", "10K+"]] },
+  { title: "Оптимизация SQL/Python дашбордов", domain: "Analytics", desc: "Рефакторинг системы отчётности. Оптимизация тяжёлых запросов и перенос расчётов на бэкенд.", metrics: [["Скорость", "↑12×"], ["Query cost", "−30%"]] },
+  { title: "SaaS для стоматологий", domain: "HealthCare", desc: "CRM/ERP: электронные карты, складской учёт, расчёт зарплат и графиков врачей.", metrics: [["Клиник", "350+"], ["Retention", "+25%"]] },
+  { title: "Мессенджер для бизнеса", domain: "Communication", desc: "Защищённая платформа с AD-интеграцией, ветками обсуждений и E2E шифрованием.", metrics: [["DAU", "150K"], ["SLA", "99.9%"]] },
+  { title: "Микросервисный паттерн заводов", domain: "E-com", desc: "ETL-система сбора данных и синхронизации остатков с маркетплейсами в реальном времени.", metrics: [["SKU", "1M+"], ["Frequency", "15m"]] },
+  { title: "Обновление товарной сетки", domain: "Retail", desc: "Автоматизация маппинга товаров между магазином и витринами маркетплейсов.", metrics: [["Error rate", "−90%"], ["Time-to-market", "−50%"]] },
+  { title: "Сервис АИ озвучки", domain: "Media", desc: "TTS/STT интеграция для автоматического дубляжа видеоконтента. Фонетическая коррекция.", metrics: [["Voice cost", "−75%"], ["Languages", "12"]] },
+  { title: "Fantasy Football Platform", domain: "SportTech", desc: "Математическая модель подсчёта очков на основе Live-статистики. Геймификация и лидерборды.", metrics: [["MAU", "50K+"], ["Avg session", "14m"]] },
+  { title: "PDF Агрегатор", domain: "SaaS", desc: "Обработка и конвертация документов. Монетизация через Stripe и аналитика поведения.", metrics: [["MRR", "$15K"], ["LTV", "$120"]] },
+  { title: "Сервис для арт-пространств", domain: "Events", desc: "Система бронирования залов, продажи билетов и CRM для управления ивентами.", metrics: [["Load", "+30%"], ["Booking time", "−60%"]] },
+  { title: "TG-бот регистрации на ивенты", domain: "Bots", desc: "Автоматизация сбора заявок, напоминаний и опросов после мероприятий в Telegram.", metrics: [["Users", "10K"], ["Conversion", "85%"]] },
+];
+
+const SKILLS = [
+  { cat: "// Анализ и проектирование", skills: [["Бизнес-анализ (BA)", 95], ["Системный анализ (SA)", 90], ["BPMN 2.0 / UML", 92], ["User Story / Use Case", 88]] },
+  { cat: "// Технический стек",        skills: [["REST / API Design", 89], ["SQL (PostgreSQL / Oracle)", 85], ["Python / Data Analysis", 75], ["Kafka / Microservices", 70]] },
+  { cat: "// Доменная экспертиза",     skills: [["Fintech / Banking", 94], ["AI & LLM Integration", 82], ["E-commerce / SaaS", 87]] },
+  { cat: "// Инструменты",             skills: [["Jira / Confluence", 95], ["Figma / UI/UX Design", 80]] },
+];
+
+const CAREER = [
+  ["2025 — н.в.", "Business Analyst", "Purrweb // Outsourcing & Ventures"],
+  ["2025", "Business Analyst", "Т-Банк // Fintech Ecosystem"],
+  ["2024 — 2025", "Fullstack Analyst (BA/SA)", "Light4U // Automation & SaaS"],
+  ["2023 — 2024", "Business Analyst", "Light4U // Digital Solutions"],
+  ["2021 — 2025", "Информационные системы и программирование", "ОмГУ им. Достоевского"],
+];
 
 export default function OsPage() {
   const [wins, setWins] = useState(DEFAULTS);
@@ -66,7 +100,21 @@ export default function OsPage() {
     }, 2800);
   }, []);
 
-  // Canvas animation
+  // Mobile: on small screens maximize profile window, minimize others
+  useEffect(() => {
+    const vw = window.innerWidth;
+    if (vw < 768) {
+      setWins(prev => ({
+        ...prev,
+        profile:  { ...prev.profile, maxed: true, pos: { left: 0, top: 32, width: vw } },
+        skills:   { ...prev.skills,   minimized: true },
+        projects: { ...prev.projects, minimized: true },
+        contact:  { ...prev.contact,  minimized: true },
+      }));
+    }
+  }, []);
+
+  // Canvas animation — paused when tab is hidden
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -89,6 +137,7 @@ export default function OsPage() {
     window.addEventListener("resize", resize);
 
     const draw = () => {
+      if (document.hidden) { rafRef.current = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, W, H);
       t += 0.008;
       dots.forEach((d) => {
@@ -111,8 +160,8 @@ export default function OsPage() {
     return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", resize); };
   }, []);
 
-  // Drag mouse events
-  const onMouseMove = useCallback((e: MouseEvent) => {
+  // Drag — Pointer Events API (mouse, touch, stylus unified)
+  const onPointerMove = useCallback((e: PointerEvent) => {
     if (!drag) return;
     if (drag.id === "desktop-icon") {
       setDesktopIconPos({ left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) });
@@ -124,13 +173,13 @@ export default function OsPage() {
     }));
   }, [drag]);
 
-  const onMouseUp = useCallback(() => setDrag(null), []);
+  const onPointerUp = useCallback(() => setDrag(null), []);
 
   useEffect(() => {
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
-    return () => { document.removeEventListener("mousemove", onMouseMove); document.removeEventListener("mouseup", onMouseUp); };
-  }, [onMouseMove, onMouseUp]);
+    document.addEventListener("pointermove", onPointerMove);
+    document.addEventListener("pointerup", onPointerUp);
+    return () => { document.removeEventListener("pointermove", onPointerMove); document.removeEventListener("pointerup", onPointerUp); };
+  }, [onPointerMove, onPointerUp]);
 
   // Window helpers
   const focusWin = (id: string) => {
@@ -156,10 +205,11 @@ export default function OsPage() {
     }
   };
 
-  const onTitlebarDown = (e: React.MouseEvent, id: string) => {
+  const onTitlebarDown = (e: React.PointerEvent, id: string) => {
     if ((e.target as HTMLElement).closest(".win-btn")) return;
     focusWin(id);
     setDrag({ id, sx: e.clientX, sy: e.clientY, sl: wins[id].pos.left, st: wins[id].pos.top });
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     e.preventDefault();
   };
 
@@ -167,10 +217,13 @@ export default function OsPage() {
 
   const winStyle = (id: string): React.CSSProperties => {
     const w = wins[id];
+    if (w.maxed) return { left: 0, top: 32, width: "100%", height: "calc(100vh - 32px)", borderRadius: 0, zIndex: w.zIndex };
+    const vw = typeof window !== "undefined" ? window.innerWidth : 1920;
     return {
-      left: w.pos.left, top: w.pos.top, width: w.pos.width,
+      left: Math.max(0, Math.min(w.pos.left, vw - 280)),
+      top: w.pos.top,
+      width: Math.min(w.pos.width, vw - 20),
       ...(w.pos.height ? { height: w.pos.height } : {}),
-      ...(w.maxed ? { borderRadius: 0, height: "calc(100vh - 32px)" } : {}),
       zIndex: w.zIndex,
     };
   };
@@ -185,7 +238,7 @@ export default function OsPage() {
         <div className="boot-lines">
           {BOOT_LABELS.map((label, i) => (
             <div key={i} className={i < bootStep ? "boot-line-done" : ""}>
-              {i < bootStep ? <span style={{ color: "#008c37" }}>[&nbsp;✓&nbsp;]</span> : "[   ]"} {label}
+              {i < bootStep ? <span style={{ color: "#008c37" }}>[&nbsp;✓&nbsp;]</span> : "[   ]"} {label}
             </div>
           ))}
         </div>
@@ -215,7 +268,6 @@ export default function OsPage() {
           </div>
           <div className="mb-right">
             <div className="mb-stat"><div className="dot" />AVAILABLE</div>
-            <div className="mb-stat">CPU 12% · MEM 3.2G</div>
             <div className="mb-clock">{clock}</div>
           </div>
         </div>
@@ -224,8 +276,9 @@ export default function OsPage() {
         <div
           className="desktop-icon"
           style={{ left: desktopIconPos.left, top: desktopIconPos.top }}
-          onMouseDown={(e) => {
+          onPointerDown={(e) => {
             setDrag({ id: "desktop-icon", sx: e.clientX, sy: e.clientY, sl: desktopIconPos.left, st: desktopIconPos.top });
+            (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
             e.preventDefault();
           }}
           onDoubleClick={() => toggleWin("artifacts")}
@@ -238,13 +291,13 @@ export default function OsPage() {
         <div
           className={`os-window${focused === "profile" ? " focused" : ""}${wins.profile.minimized ? " minimized" : ""}`}
           style={winStyle("profile")}
-          onMouseDown={() => focusWin("profile")}
+          onPointerDown={() => focusWin("profile")}
         >
-          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "profile")}>
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "profile")}>
             <div className="win-btns">
-              <button className="win-btn close"  onClick={() => closeWin("profile")} />
-              <button className="win-btn min"    onClick={() => closeWin("profile")} />
-              <button className="win-btn max"    onClick={() => toggleMax("profile")} />
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("profile")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("profile")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("profile")} />
             </div>
             <div className="win-title">PROFILE.db</div>
           </div>
@@ -256,7 +309,7 @@ export default function OsPage() {
             <div className={`tab-panel wp${tabs.profile === "info" ? " active" : ""}`}>
               <div className="profile-header">
                 <div className="profile-avatar">
-                  <img className="avatar-img" src="/avatar.jpg" alt="Артем Козыренко" />
+                  <Image className="avatar-img" src="/avatar.jpg" alt="Артем Козыренко" width={72} height={72} />
                 </div>
                 <div>
                   <div className="profile-name">Артем Козыренко</div>
@@ -268,22 +321,15 @@ export default function OsPage() {
                 </div>
               </div>
               <div className="profile-bio">
-                <strong>Системный аналитик с 6+ годами опыта</strong> в финтехе, ретейле и промышленной автоматизации. Специализируюсь на проектировании требований, моделировании процессов и архитектуре данных.
+                <strong>Аналитик с 4 годами опыта</strong> в разработке и проектировании сложных ИТ-систем. Прошёл путь от Frontend-разработчика до Fullstack-аналитика. Специализируюсь на глубокой технической аналитике (SA) и оптимизации бизнес-процессов (BA). Эксперт в проектировании AI-решений, Fintech-продуктов и высоконагруженных SaaS-платформ.
               </div>
-              <div className="kv-row"><span className="kv-key">Опыт</span><span className="kv-val">6+ лет</span></div>
-              <div className="kv-row"><span className="kv-key">Проектов</span><span className="kv-val">34 завершённых</span></div>
-              <div className="kv-row"><span className="kv-key">Домены</span><span className="kv-val">Fintech · Retail · Enterprise</span></div>
-              <div className="kv-row"><span className="kv-key">Сертификаты</span><span className="kv-val">TOGAF 9.2 · BABOK</span></div>
-              <div className="kv-row"><span className="kv-key">Статус</span><span className="kv-val green">● Открыт к предложениям</span></div>
+              <div className="kv-row"><span className="kv-key">Опыт</span><span className="kv-val">4 года</span></div>
+              <div className="kv-row"><span className="kv-key">Проектов</span><span className="kv-val">15+ успешно закрытых</span></div>
+              <div className="kv-row"><span className="kv-key">Домены</span><span className="kv-val">Fintech · AI/ML · SaaS · MedTech</span></div>
+              <div className="kv-row"><span className="kv-key">Статус</span><span className="kv-val green">● Открыт к сложным задачам</span></div>
             </div>
             <div className={`tab-panel wp${tabs.profile === "career" ? " active" : ""}`}>
-              {[
-                ["2023—н.в.", "Senior Business Analyst", "SBER // Digital Platforms"],
-                ["2021—23", "Business Analyst", "Tinkoff // Fintech Products"],
-                ["2019—21", "Systems Analyst", "X5 Group // Retail Tech"],
-                ["2017—19", "Junior BA", "Luxoft // Enterprise"],
-                ["2013—17", "Прикладная математика", "НИУ ВШЭ"],
-              ].map(([year, role, co]) => (
+              {CAREER.map(([year, role, co]) => (
                 <div className="tl-item" key={year}>
                   <div className="tl-year">{year}</div>
                   <div><div className="tl-role">{role}</div><div className="tl-co">{co}</div></div>
@@ -297,24 +343,19 @@ export default function OsPage() {
         <div
           className={`os-window${focused === "skills" ? " focused" : ""}${wins.skills.minimized ? " minimized" : ""}`}
           style={winStyle("skills")}
-          onMouseDown={() => focusWin("skills")}
+          onPointerDown={() => focusWin("skills")}
         >
-          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "skills")}>
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "skills")}>
             <div className="win-btns">
-              <button className="win-btn close" onClick={() => closeWin("skills")} />
-              <button className="win-btn min"   onClick={() => closeWin("skills")} />
-              <button className="win-btn max"   onClick={() => toggleMax("skills")} />
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("skills")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("skills")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("skills")} />
             </div>
             <div className="win-title">SKILLS.json</div>
           </div>
           <div className="win-body">
             <div className="wp">
-              {[
-                { cat: "// Анализ требований", skills: [["BABOK / IIBA", 95], ["User Story / BDD", 92], ["Use Case / UML", 88]] },
-                { cat: "// Моделирование",      skills: [["BPMN 2.0", 90], ["ArchiMate", 78]] },
-                { cat: "// Данные",             skills: [["SQL", 85], ["Python / Pandas", 72], ["Power BI", 80]] },
-                { cat: "// Интеграции",         skills: [["REST / OpenAPI", 87], ["Kafka / gRPC", 68]] },
-              ].map(({ cat, skills }) => (
+              {SKILLS.map(({ cat, skills }) => (
                 <div key={cat}>
                   <div className="skill-cat-header">{cat}</div>
                   {skills.map(([name, pct]) => (
@@ -336,23 +377,19 @@ export default function OsPage() {
         <div
           className={`os-window${focused === "projects" ? " focused" : ""}${wins.projects.minimized ? " minimized" : ""}`}
           style={winStyle("projects")}
-          onMouseDown={() => focusWin("projects")}
+          onPointerDown={() => focusWin("projects")}
         >
-          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "projects")}>
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "projects")}>
             <div className="win-btns">
-              <button className="win-btn close" onClick={() => closeWin("projects")} />
-              <button className="win-btn min"   onClick={() => closeWin("projects")} />
-              <button className="win-btn max"   onClick={() => toggleMax("projects")} />
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("projects")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("projects")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("projects")} />
             </div>
             <div className="win-title">PROJECTS</div>
           </div>
           <div className="win-body">
             <div className="wp">
-              {[
-                { title: "Автоматизация кредитного конвейера", domain: "Fintech", desc: "Полный реинжиниринг процесса выдачи кредитов. От заявки до выдачи без участия операциониста.", metrics: [["Time-to-credit", "−68%"], ["Заявок/мес", "3.2M"]] },
-                { title: "MDM — единое управление ассортиментом", domain: "Retail", desc: "Проектирование мастер-системы для управления 200K+ SKU. Интеграция 14 систем-источников.", metrics: [["Систем", "14"], ["SKU", "200K+"]] },
-                { title: "Data Governance платформа", domain: "Analytics", desc: "Архитектура управления данными банка: каталог, data lineage, политики качества. 40+ доменов.", metrics: [["Доменов", "40+"], ["Data quality", "↑4×"]] },
-              ].map(({ title, domain, desc, metrics }) => (
+              {PROJECTS.map(({ title, domain, desc, metrics }) => (
                 <div className="project-item" key={title}>
                   <div className="proj-header">
                     <div className="proj-title-os">{title}</div>
@@ -372,13 +409,13 @@ export default function OsPage() {
         <div
           className={`os-window${focused === "contact" ? " focused" : ""}${wins.contact.minimized ? " minimized" : ""}`}
           style={winStyle("contact")}
-          onMouseDown={() => focusWin("contact")}
+          onPointerDown={() => focusWin("contact")}
         >
-          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "contact")}>
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "contact")}>
             <div className="win-btns">
-              <button className="win-btn close" onClick={() => closeWin("contact")} />
-              <button className="win-btn min"   onClick={() => closeWin("contact")} />
-              <button className="win-btn max"   onClick={() => toggleMax("contact")} />
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("contact")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("contact")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("contact")} />
             </div>
             <div className="win-title">CONTACT.sh</div>
           </div>
@@ -404,6 +441,11 @@ export default function OsPage() {
                 <div><div className="ci-label">Telegram канал</div><div className="ci-val">@sleepycoffeem</div></div>
                 <div className="ci-arrow">→</div>
               </a>
+              <a className="contact-item" href="https://linkedin.com/in/kozyrenko" target="_blank" rel="noopener noreferrer">
+                <div className="ci-icon">🔗</div>
+                <div><div className="ci-label">LinkedIn</div><div className="ci-val">linkedin.com/in/kozyrenko</div></div>
+                <div className="ci-arrow">→</div>
+              </a>
               <div className="avail-block">
                 <div className="avail-dot" />
                 <div className="avail-text">SYSTEM ONLINE<br />Открыт к новым проектам</div>
@@ -416,13 +458,13 @@ export default function OsPage() {
         <div
           className={`os-window${focused === "artifacts" ? " focused" : ""}${wins.artifacts.minimized ? " minimized" : ""}`}
           style={winStyle("artifacts")}
-          onMouseDown={() => focusWin("artifacts")}
+          onPointerDown={() => focusWin("artifacts")}
         >
-          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "artifacts")}>
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "artifacts")}>
             <div className="win-btns">
-              <button className="win-btn close" onClick={() => closeWin("artifacts")} />
-              <button className="win-btn min"   onClick={() => closeWin("artifacts")} />
-              <button className="win-btn max"   onClick={() => toggleMax("artifacts")} />
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("artifacts")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("artifacts")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("artifacts")} />
             </div>
             <div className="win-title">АРТЕФАКТЫ — Finder</div>
           </div>
@@ -491,7 +533,7 @@ export default function OsPage() {
                         return <img src={src} alt={finderPreview} className="finder-img-preview" />;
                       }
                       if (type === "pdf" || type === "html") {
-                        return <iframe src={src} className="finder-iframe" title={finderPreview} />;
+                        return <iframe src={src} className="finder-iframe" title={finderPreview} sandbox="allow-scripts allow-same-origin" />;
                       }
                       return (
                         <div className="finder-preview-unsupported">
