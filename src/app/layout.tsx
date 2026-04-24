@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Артем Козыренко",
   },
   description:
-    "Портфолио Senior Business Analyst с 6+ лет опыта. Финтех (Sber, Tinkoff), ретейл (X5 Group), аналитика данных. Открыт к предложениям.",
+    "Портфолио Senior Business Analyst с 4+ годами опыта. Финтех (Т-Банк, Purrweb), AI/ML, SaaS. 15+ успешных проектов. Открыт к предложениям.",
   alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
