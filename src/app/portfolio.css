@@ -259,7 +259,7 @@
 .sg-item.primary { color: var(--ink); }
 
 /* ── CONTACT ─────────────────────────────────────────── */
-#contact { background: var(--ink); }
+#contact { background: var(--ink); position: relative; overflow: hidden; }
 #contact .section-label { color: rgba(255,255,255,0.3); }
 #contact .section-label::before { background: rgba(255,255,255,0.2); }
 #contact .section-title { color: #fff; }
