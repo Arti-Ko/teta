@@ -316,6 +316,7 @@ export default function Home() {
         <div className="footer-left">© 2026 · Артем Козыренко</div>
         <div className="footer-right">Business Analyst · Omsk</div>
       </footer>
+      <CanvasAnimation />
 
       <PortfolioScripts />
     </div>
