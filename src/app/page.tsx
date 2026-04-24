@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import "./portfolio.css";
 import PortfolioScripts from "./_components/PortfolioScripts";
 import CanvasAnimation from "./_components/CanvasAnimation";
