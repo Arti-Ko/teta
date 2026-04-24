@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./portfolio.css";
 import PortfolioScripts from "./_components/PortfolioScripts";
+import CanvasAnimation from "./_components/CanvasAnimation";
 
 export const metadata: Metadata = {
   title: "Артем Козыренко — Senior Business Analyst",
