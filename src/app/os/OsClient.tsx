@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import "./os.css";
-import { ARTIFACTS } from "./artifacts";
+import { ARTIFACTS, FOLDERS } from "./artifacts";
 
 interface WinState {
   minimized: boolean;
@@ -35,6 +35,8 @@ export default function OsPage() {
   const [drag, setDrag] = useState<{ id: string; sx: number; sy: number; sl: number; st: number } | null>(null);
   const [finderSelected, setFinderSelected] = useState<string | null>(null);
   const [finderPreview, setFinderPreview] = useState<string | null>(null);
+  const [finderFolder, setFinderFolder] = useState<string | null>(null);
+  const [desktopIconPos, setDesktopIconPos] = useState({ left: 20, top: 56 });
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
 
@@ -112,6 +114,10 @@ export default function OsPage() {
   // Drag mouse events
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!drag) return;
+    if (drag.id === "desktop-icon") {
+      setDesktopIconPos({ left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) });
+      return;
+    }
     setWins((prev) => ({
       ...prev,
       [drag.id]: { ...prev[drag.id], pos: { ...prev[drag.id].pos, left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) } },
@@ -212,6 +218,20 @@ export default function OsPage() {
             <div className="mb-stat">CPU 12% · MEM 3.2G</div>
             <div className="mb-clock">{clock}</div>
           </div>
+        </div>
+
+        {/* ── DESKTOP FOLDER ICON ── */}
+        <div
+          className="desktop-icon"
+          style={{ left: desktopIconPos.left, top: desktopIconPos.top }}
+          onMouseDown={(e) => {
+            setDrag({ id: "desktop-icon", sx: e.clientX, sy: e.clientY, sl: desktopIconPos.left, st: desktopIconPos.top });
+            e.preventDefault();
+          }}
+          onDoubleClick={() => toggleWin("artifacts")}
+        >
+          <div className="desktop-folder-icon" />
+          <div className="desktop-icon-label">Артефакты</div>
         </div>
 
         {/* ── PROFILE WINDOW ── */}
@@ -404,44 +424,80 @@ export default function OsPage() {
               <button className="win-btn min"   onClick={() => closeWin("artifacts")} />
               <button className="win-btn max"   onClick={() => toggleMax("artifacts")} />
             </div>
-            <div className="win-title">АРТЕФАКТЫ</div>
+            <div className="win-title">АРТЕФАКТЫ — Finder</div>
           </div>
           <div className="finder-body">
+            {/* Sidebar */}
             <div className="finder-sidebar">
               <div className="finder-sidebar-section">Избранное</div>
-              <div className="finder-sidebar-item active">
-                <span className="finder-sidebar-icon">▤</span> Артефакты
+              <div
+                className={`finder-sidebar-item${finderFolder === null ? " active" : ""}`}
+                onClick={() => { setFinderFolder(null); setFinderPreview(null); }}
+              >
+                <span className="finder-sidebar-icon">◈</span>
+                <span className="finder-sidebar-itemlabel">Все файлы</span>
+                <span className="finder-sidebar-count">{ARTIFACTS.length}</span>
+              </div>
+              {FOLDERS.map((f) => {
+                const cnt = ARTIFACTS.filter((a) => a.folder === f.name).length;
+                if (cnt === 0) return null;
+                return (
+                  <div
+                    key={f.name}
+                    className={`finder-sidebar-item${finderFolder === f.name ? " active" : ""}`}
+                    onClick={() => { setFinderFolder(f.name); setFinderPreview(null); }}
+                  >
+                    <span className="finder-sidebar-icon">▤</span>
+                    <span className="finder-sidebar-itemlabel">{f.name}</span>
+                    <span className="finder-sidebar-count">{cnt}</span>
+                  </div>
+                );
+              })}
+              <div className="finder-sidebar-footer">
+                {ARTIFACTS.length} артефактов
               </div>
             </div>
+            {/* Main */}
             <div className="finder-main">
+              {/* Path bar */}
+              <div className="finder-pathbar">
+                <span className="finder-path-seg">Артефакты</span>
+                {finderFolder && <><span className="finder-path-sep">›</span><span className="finder-path-seg active">{finderFolder}</span></>}
+                {finderPreview && <><span className="finder-path-sep">›</span><span className="finder-path-seg active">{finderPreview}</span></>}
+              </div>
               {finderPreview ? (
                 <div className="finder-preview">
                   <div className="finder-preview-toolbar">
                     <button className="finder-back-btn" onClick={() => setFinderPreview(null)}>← Назад</button>
                     <span className="finder-preview-name">{finderPreview}</span>
-                    <a
-                      className="finder-download-btn"
-                      href={`/artifacts/${encodeURIComponent(finderPreview)}`}
-                      download={finderPreview}
-                    >
-                      ↓ Скачать
-                    </a>
+                    {(() => {
+                      const art = ARTIFACTS.find((a) => a.name === finderPreview);
+                      const href = art
+                        ? `/artifacts/${encodeURIComponent(art.folder)}/${encodeURIComponent(finderPreview)}`
+                        : `/artifacts/${encodeURIComponent(finderPreview)}`;
+                      return (
+                        <a className="finder-download-btn" href={href} download={finderPreview}>↓ Скачать</a>
+                      );
+                    })()}
                   </div>
                   <div className="finder-preview-content">
                     {(() => {
                       const art = ARTIFACTS.find((a) => a.name === finderPreview);
                       const type = art?.type ?? "pdf";
+                      const src = art
+                        ? `/artifacts/${encodeURIComponent(art.folder)}/${encodeURIComponent(finderPreview)}`
+                        : `/artifacts/${encodeURIComponent(finderPreview)}`;
                       if (["png", "jpg", "jpeg"].includes(type)) {
-                        return <img src={`/artifacts/${encodeURIComponent(finderPreview)}`} alt={finderPreview} className="finder-img-preview" />;
+                        return <img src={src} alt={finderPreview} className="finder-img-preview" />;
                       }
                       if (type === "pdf" || type === "html") {
-                        return <iframe src={`/artifacts/${encodeURIComponent(finderPreview)}`} className="finder-iframe" title={finderPreview} />;
+                        return <iframe src={src} className="finder-iframe" title={finderPreview} />;
                       }
                       return (
                         <div className="finder-preview-unsupported">
                           <div className="finder-file-icon-lg" data-type={type} />
                           <div className="finder-preview-filename">{finderPreview}</div>
-                          <a href={`/artifacts/${encodeURIComponent(finderPreview)}`} download={finderPreview} className="finder-download-btn-lg">↓ Скачать файл</a>
+                          <a href={src} download={finderPreview} className="finder-download-btn-lg">↓ Скачать файл</a>
                         </div>
                       );
                     })()}
@@ -449,26 +505,32 @@ export default function OsPage() {
                 </div>
               ) : (
                 <div className="finder-grid">
-                  {ARTIFACTS.length === 0 ? (
-                    <div className="finder-empty">
-                      <div className="finder-empty-icon">▤</div>
-                      <div>Нет файлов</div>
-                      <div className="finder-empty-hint">Добавьте файлы в /public/artifacts/</div>
-                    </div>
-                  ) : (
-                    ARTIFACTS.map((art) => (
+                  {(() => {
+                    const visible = finderFolder
+                      ? ARTIFACTS.filter((a) => a.folder === finderFolder)
+                      : ARTIFACTS;
+                    if (visible.length === 0) {
+                      return (
+                        <div className="finder-empty">
+                          <div className="finder-empty-icon">▤</div>
+                          <div>Нет файлов</div>
+                          <div className="finder-empty-hint">Добавьте файлы в public/artifacts/{finderFolder ?? ""}/</div>
+                        </div>
+                      );
+                    }
+                    return visible.map((art) => (
                       <div
-                        key={art.name}
-                        className={`finder-file${finderSelected === art.name ? " selected" : ""}`}
-                        onClick={() => setFinderSelected(art.name)}
-                        onDoubleClick={() => { setFinderSelected(art.name); setFinderPreview(art.name); }}
+                        key={`${art.folder}/${art.name}`}
+                        className={`finder-file${finderSelected === `${art.folder}/${art.name}` ? " selected" : ""}`}
+                        onClick={() => setFinderSelected(`${art.folder}/${art.name}`)}
+                        onDoubleClick={() => { setFinderSelected(`${art.folder}/${art.name}`); setFinderPreview(art.name); }}
                       >
                         <div className="finder-file-icon" data-type={art.type} />
                         <div className="finder-file-name">{art.name}</div>
                         {art.size && <div className="finder-file-size">{art.size}</div>}
                       </div>
-                    ))
-                  )}
+                    ));
+                  })()}
                 </div>
               )}
             </div>
