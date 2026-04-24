@@ -57,7 +57,7 @@ const jsonLd = {
   name: "Артем Козыренко",
   jobTitle: "Senior Business Analyst",
   url: siteUrl,
-  sameAs: ["https://t.me/SleepyCoffeeT"],
+  sameAs: ["https://t.me/SleepyCoffeeT", "https://linkedin.com/in/kozyrenko"],
   email: "arti.k.renko@gmail.com",
   address: { "@type": "PostalAddress", addressLocality: "Omsk", addressCountry: "RU" },
   knowsAbout: ["Business Analysis", "BPMN", "BABOK", "SQL", "Kafka", "REST API", "Data Governance"],
