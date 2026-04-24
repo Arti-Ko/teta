@@ -135,6 +135,7 @@
 .win-btn.max    { background: #28c840; }
 .win-title { font-family: var(--os-mono); font-size: 10px; color: var(--os-text-mid); letter-spacing: 0.1em; flex: 1; text-align: center; margin-right: 30px; }
 .win-body { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 0; scrollbar-width: thin; scrollbar-color: var(--os-border) transparent; }
+.win-body .wp { user-select: text; }
 .win-body::-webkit-scrollbar { width: 3px; }
 .win-body::-webkit-scrollbar-thumb { background: var(--os-border); }
 
