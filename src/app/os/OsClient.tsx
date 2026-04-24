@@ -434,7 +434,7 @@ export default function OsPage() {
                       if (["png", "jpg", "jpeg"].includes(type)) {
                         return <img src={`/artifacts/${encodeURIComponent(finderPreview)}`} alt={finderPreview} className="finder-img-preview" />;
                       }
-                      if (type === "pdf") {
+                      if (type === "pdf" || type === "html") {
                         return <iframe src={`/artifacts/${encodeURIComponent(finderPreview)}`} className="finder-iframe" title={finderPreview} />;
                       }
                       return (
