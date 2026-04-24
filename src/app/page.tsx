@@ -88,6 +88,20 @@ export default function Home() {
           </div>
           <div className="about-grid">
             <div className="about-body reveal d1">
+              <div className="about-avatar-row">
+                <Image
+                  src="/avatar.jpg"
+                  alt="Артем Козыренко"
+                  width={72}
+                  height={72}
+                  className="about-avatar"
+                  priority
+                />
+                <div className="about-avatar-meta">
+                  <div className="about-avatar-name">Артем Козыренко</div>
+                  <div className="about-avatar-role">Business Analyst · Омск</div>
+                </div>
+              </div>
               <p>
                 <strong>Аналитик с 4 годами опыта</strong> в разработке и проектировании
                 сложных ИТ-систем. Прошёл путь от Frontend-разработчика до Fullstack-аналитика.
