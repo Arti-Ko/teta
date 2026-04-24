@@ -272,6 +272,11 @@ export default function Home() {
 
       {/* ── CONTACT ── */}
       <section id="contact">
+
+        <CanvasAnimation />
+        <PortfolioScripts />
+
+
         <div className="section-wrap">
           <div className="reveal">
             <div className="avail-pill"><div className="ap-dot" />Открыт к предложениям</div>
@@ -316,9 +321,7 @@ export default function Home() {
         <div className="footer-left">© 2026 · Артем Козыренко</div>
         <div className="footer-right">Business Analyst · Omsk</div>
       </footer>
-      <CanvasAnimation />
 
-      <PortfolioScripts />
     </div>
   );
 }
