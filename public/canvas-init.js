@@ -12,8 +12,8 @@
     let autoProgress = 0;
     let scrollProgress = 1; 
 
-    const GRID = 2;
-    const P_SIZE = 1;
+    const GRID = 2.5;
+    const P_SIZE = 1.2;
     const PADDING_RIGHT = 0; 
     const PADDING_BOTTOM = 0;
 
