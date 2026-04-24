@@ -19,6 +19,12 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="portfolio-page">
+      {/* Scroll progress bar */}
+      <div id="scrollBar" className="scroll-progress" />
+
+      {/* Scroll to top */}
+      <button id="toTopBtn" className="to-top-btn" aria-label="Наверх">↑</button>
+
       <Link href="/os" className="fab-os">
         <div className="os-indicator" />
         ЗАПУСТИТЬ ОС
