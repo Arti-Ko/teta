@@ -20,16 +20,20 @@ export default function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", marginBottom: "32px" }}>
-          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF3B2E", marginRight: "12px" }} />
-          <span style={{ color: "#FF3B2E", fontSize: "14px", letterSpacing: "6px", fontFamily: "monospace" }}>
+          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF3B2E", marginRight: "12px", display: "flex" }} />
+          <span style={{ color: "#FF3B2E", fontSize: "14px", letterSpacing: "6px" }}>
             SENIOR BUSINESS ANALYST
           </span>
         </div>
-        <div style={{ color: "#ffffff", fontSize: "80px", fontWeight: 700, lineHeight: 1.05, marginBottom: "24px", letterSpacing: "-2px" }}>
-          Артем<br />Козыренко
+        <div style={{ display: "flex", flexDirection: "column", marginBottom: "24px" }}>
+          <span style={{ color: "#ffffff", fontSize: "80px", fontWeight: 700, lineHeight: 1.05 }}>
+            Артем Козыренко
+          </span>
         </div>
-        <div style={{ color: "#888888", fontSize: "24px", maxWidth: "800px", lineHeight: 1.5 }}>
-          Финтех · Ретейл · Данные · 6+ лет · 34 проекта
+        <div style={{ display: "flex" }}>
+          <span style={{ color: "#888888", fontSize: "24px" }}>
+            Финтех · Ретейл · Данные · 6+ лет · 34 проекта
+          </span>
         </div>
       </div>
     ),
