@@ -1,9 +1,9 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import "./os.css";
+import { ARTIFACTS } from "./artifacts";
 
 interface WinState {
   minimized: boolean;
@@ -14,10 +14,11 @@ interface WinState {
 }
 
 const DEFAULTS: Record<string, WinState> = {
-  profile:  { minimized: false, zIndex: 22, maxed: false, pos: { left: 60,  top: 52,  width: 420 } },
-  skills:   { minimized: false, zIndex: 21, maxed: false, pos: { left: 500, top: 52,  width: 360 } },
-  projects: { minimized: false, zIndex: 20, maxed: false, pos: { left: 60,  top: 450, width: 480, height: 350 } },
-  contact:  { minimized: false, zIndex: 19, maxed: false, pos: { left: 560, top: 430, width: 340 } },
+  profile:   { minimized: false, zIndex: 22, maxed: false, pos: { left: 60,  top: 52,  width: 420 } },
+  skills:    { minimized: false, zIndex: 21, maxed: false, pos: { left: 500, top: 52,  width: 360 } },
+  projects:  { minimized: false, zIndex: 20, maxed: false, pos: { left: 60,  top: 450, width: 480, height: 350 } },
+  contact:   { minimized: false, zIndex: 19, maxed: false, pos: { left: 560, top: 430, width: 340 } },
+  artifacts: { minimized: true,  zIndex: 18, maxed: false, pos: { left: 120, top: 60,  width: 680, height: 500 } },
 };
 
 const BOOT_LABELS = ["KERNEL LOADED", "PROFILE DATABASE", "SKILL INDEX", "PROJECT ARCHIVE", "INTERFACE READY"];
@@ -32,6 +33,8 @@ export default function OsPage() {
   const [tabs, setTabs] = useState<Record<string, string>>({ profile: "info" });
   const [skillsAnimated, setSkillsAnimated] = useState(false);
   const [drag, setDrag] = useState<{ id: string; sx: number; sy: number; sl: number; st: number } | null>(null);
+  const [finderSelected, setFinderSelected] = useState<string | null>(null);
+  const [finderPreview, setFinderPreview] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
 
@@ -161,7 +164,7 @@ export default function OsPage() {
     return {
       left: w.pos.left, top: w.pos.top, width: w.pos.width,
       ...(w.pos.height ? { height: w.pos.height } : {}),
-      ...(w.maxed ? { borderRadius: 0 } : {}),
+      ...(w.maxed ? { borderRadius: 0, height: "calc(100vh - 32px)" } : {}),
       zIndex: w.zIndex,
     };
   };
@@ -389,16 +392,105 @@ export default function OsPage() {
           </div>
         </div>
 
+        {/* ── ARTIFACTS FINDER WINDOW ── */}
+        <div
+          className={`os-window${focused === "artifacts" ? " focused" : ""}${wins.artifacts.minimized ? " minimized" : ""}`}
+          style={winStyle("artifacts")}
+          onMouseDown={() => focusWin("artifacts")}
+        >
+          <div className="win-titlebar" onMouseDown={(e) => onTitlebarDown(e, "artifacts")}>
+            <div className="win-btns">
+              <button className="win-btn close" onClick={() => closeWin("artifacts")} />
+              <button className="win-btn min"   onClick={() => closeWin("artifacts")} />
+              <button className="win-btn max"   onClick={() => toggleMax("artifacts")} />
+            </div>
+            <div className="win-title">АРТЕФАКТЫ</div>
+          </div>
+          <div className="finder-body">
+            <div className="finder-sidebar">
+              <div className="finder-sidebar-section">Избранное</div>
+              <div className="finder-sidebar-item active">
+                <span className="finder-sidebar-icon">▤</span> Артефакты
+              </div>
+            </div>
+            <div className="finder-main">
+              {finderPreview ? (
+                <div className="finder-preview">
+                  <div className="finder-preview-toolbar">
+                    <button className="finder-back-btn" onClick={() => setFinderPreview(null)}>← Назад</button>
+                    <span className="finder-preview-name">{finderPreview}</span>
+                    <a
+                      className="finder-download-btn"
+                      href={`/artifacts/${encodeURIComponent(finderPreview)}`}
+                      download={finderPreview}
+                    >
+                      ↓ Скачать
+                    </a>
+                  </div>
+                  <div className="finder-preview-content">
+                    {(() => {
+                      const art = ARTIFACTS.find((a) => a.name === finderPreview);
+                      const type = art?.type ?? "pdf";
+                      if (["png", "jpg", "jpeg"].includes(type)) {
+                        return <img src={`/artifacts/${encodeURIComponent(finderPreview)}`} alt={finderPreview} className="finder-img-preview" />;
+                      }
+                      if (type === "pdf") {
+                        return <iframe src={`/artifacts/${encodeURIComponent(finderPreview)}`} className="finder-iframe" title={finderPreview} />;
+                      }
+                      return (
+                        <div className="finder-preview-unsupported">
+                          <div className="finder-file-icon-lg" data-type={type} />
+                          <div className="finder-preview-filename">{finderPreview}</div>
+                          <a href={`/artifacts/${encodeURIComponent(finderPreview)}`} download={finderPreview} className="finder-download-btn-lg">↓ Скачать файл</a>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
+              ) : (
+                <div className="finder-grid">
+                  {ARTIFACTS.length === 0 ? (
+                    <div className="finder-empty">
+                      <div className="finder-empty-icon">▤</div>
+                      <div>Нет файлов</div>
+                      <div className="finder-empty-hint">Добавьте файлы в /public/artifacts/</div>
+                    </div>
+                  ) : (
+                    ARTIFACTS.map((art) => (
+                      <div
+                        key={art.name}
+                        className={`finder-file${finderSelected === art.name ? " selected" : ""}`}
+                        onClick={() => setFinderSelected(art.name)}
+                        onDoubleClick={() => { setFinderSelected(art.name); setFinderPreview(art.name); }}
+                      >
+                        <div className="finder-file-icon" data-type={art.type} />
+                        <div className="finder-file-name">{art.name}</div>
+                        {art.size && <div className="finder-file-size">{art.size}</div>}
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* Dock */}
         <div className="os-dock">
-          {(["profile", "skills", "projects", "contact"] as const).map((id) => (
+          {[
+            { id: "profile",   icon: "◈", label: "Profile" },
+            { id: "skills",    icon: "◆", label: "Skills" },
+            { id: "projects",  icon: "▦", label: "Projects" },
+            { id: "contact",   icon: "◎", label: "Contact" },
+            { id: "artifacts", icon: "▤", label: "Артефакты" },
+          ].map(({ id, icon, label }) => (
             <div
               key={id}
               className={`dock-item${!wins[id].minimized ? " open" : ""}`}
               onClick={() => toggleWin(id)}
             >
-              <div className="dock-icon">{id === "profile" ? "◈" : id === "skills" ? "◆" : id === "projects" ? "▦" : "◎"}</div>
-              <div className="dock-label">{id === "profile" ? "Profile" : id === "skills" ? "Skills" : id === "projects" ? "Projects" : "Contact"}</div>
+              <div className="dock-icon">{icon}</div>
+              <div className="dock-label">{label}</div>
               <div className="dock-dot" />
             </div>
           ))}

@@ -8,8 +8,8 @@
   --border:  #E4E3DC;
   --red:     #FF3B2E;
   --red-bg:  rgba(255,59,46,0.07);
-  --sans:    var(--font-dm-sans), 'DM Sans', sans-serif;
-  --mono:    var(--font-space-mono), 'Space Mono', monospace;
+  --sans:    var(--font-dm-sans, 'DM Sans'), sans-serif;
+  --mono:    var(--font-space-mono, 'Space Mono'), monospace;
   --r:       14px;
 }
 
