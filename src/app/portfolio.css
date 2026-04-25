@@ -48,7 +48,7 @@
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, #C8C8C2 1px, transparent 1px);
+  background-image: radial-gradient(circle, #7e7e7e 1px, transparent 1px);
   background-size: 28px 28px;
   opacity: 0.35;
   pointer-events: none;
@@ -551,6 +551,8 @@
   opacity: 0.5;
 }
 
+[data-theme="dark"] .hstat:hover { background: #1a1918; }
+
 /* ── DARK MODE — about section ────────────────────────────── */
 [data-theme="dark"] #about { background: var(--white); }
 
@@ -564,6 +566,9 @@
 /* ── DARK MODE — nav active ──────────────────────────────── */
 [data-theme="dark"] .nav-links a.nav-active { background: var(--white); }
 [data-theme="dark"] .nav-links a:hover { background: var(--white); }
+
+/* ── DARK MODE — project row hover ──────────────────────── */
+[data-theme="dark"] .proj-row:hover { background: var(--white); box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 
 /* ── PREFERS REDUCED MOTION ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

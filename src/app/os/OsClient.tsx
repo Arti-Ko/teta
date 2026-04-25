@@ -21,26 +21,153 @@ const DEFAULTS: Record<string, WinState> = {
   contact:   { minimized: false, zIndex: 19, maxed: false, pos: { left: 560, top: 430, width: 340 } },
   artifacts: { minimized: true,  zIndex: 18, maxed: false, pos: { left: 120, top: 60,  width: 680, height: 500 } },
   blog:      { minimized: true,  zIndex: 17, maxed: false, pos: { left: 200, top: 80,  width: 460, height: 520 } },
+  project:   { minimized: true,  zIndex: 16, maxed: false, pos: { left: 140, top: 55,  width: 740, height: 560 } },
 };
 
 const BOOT_LABELS = ["KERNEL LOADED", "PROFILE DATABASE", "SKILL INDEX", "PROJECT ARCHIVE", "INTERFACE READY"];
 
-const PROJECTS = [
-  { title: "АИ продукты для финтеха", domain: "Fintech", desc: "Автоматизация скоринга и оценки LTV корпоратов. Внедрение ML-моделей в банковский контур.", metrics: [["Точность", "+24%"], ["Decision time", "−40%"]] },
-  { title: "Private LLM сервис", domain: "AI & Security", desc: "Изолированная LLM-инфраструктура с RAG-архитектурой. Защита данных и поиск по базе знаний 100K+.", metrics: [["Data Privacy", "100%"], ["Search speed", "↑8×"]] },
-  { title: "Hybrid Compliance System", domain: "LegalTech", desc: "Программно-аппаратный комплекс мониторинга. Интеграция IoT-датчиков и автоматизация отчётности.", metrics: [["Штрафы", "−40%"], ["Объектов", "50+"]] },
-  { title: "Анонимизатор мед-данных", domain: "MedTech", desc: "NLP-сервис обезличивания ПДн в документах. Соответствие ФЗ-152 и международным стандартам.", metrics: [["Утечки", "0"], ["Accuracy", "99.8%"]] },
-  { title: "SaaS для горнолыжек и отелей", domain: "HoReCa", desc: "ERP-система: ски-пасс, бронирование, прокат. Логика динамического ценообразования.", metrics: [["RevPAR", "+18%"], ["Users", "10K+"]] },
-  { title: "Оптимизация SQL/Python дашбордов", domain: "Analytics", desc: "Рефакторинг системы отчётности. Оптимизация тяжёлых запросов и перенос расчётов на бэкенд.", metrics: [["Скорость", "↑12×"], ["Query cost", "−30%"]] },
-  { title: "SaaS для стоматологий", domain: "HealthCare", desc: "CRM/ERP: электронные карты, складской учёт, расчёт зарплат и графиков врачей.", metrics: [["Клиник", "350+"], ["Retention", "+25%"]] },
-  { title: "Мессенджер для бизнеса", domain: "Communication", desc: "Защищённая платформа с AD-интеграцией, ветками обсуждений и E2E шифрованием.", metrics: [["DAU", "150K"], ["SLA", "99.9%"]] },
-  { title: "Микросервисный паттерн заводов", domain: "E-com", desc: "ETL-система сбора данных и синхронизации остатков с маркетплейсами в реальном времени.", metrics: [["SKU", "1M+"], ["Frequency", "15m"]] },
-  { title: "Обновление товарной сетки", domain: "Retail", desc: "Автоматизация маппинга товаров между магазином и витринами маркетплейсов.", metrics: [["Error rate", "−90%"], ["Time-to-market", "−50%"]] },
-  { title: "Сервис АИ озвучки", domain: "Media", desc: "TTS/STT интеграция для автоматического дубляжа видеоконтента. Фонетическая коррекция.", metrics: [["Voice cost", "−75%"], ["Languages", "12"]] },
-  { title: "Fantasy Football Platform", domain: "SportTech", desc: "Математическая модель подсчёта очков на основе Live-статистики. Геймификация и лидерборды.", metrics: [["MAU", "50K+"], ["Avg session", "14m"]] },
-  { title: "PDF Агрегатор", domain: "SaaS", desc: "Обработка и конвертация документов. Монетизация через Stripe и аналитика поведения.", metrics: [["MRR", "$15K"], ["LTV", "$120"]] },
-  { title: "Сервис для арт-пространств", domain: "Events", desc: "Система бронирования залов, продажи билетов и CRM для управления ивентами.", metrics: [["Load", "+30%"], ["Booking time", "−60%"]] },
-  { title: "TG-бот регистрации на ивенты", domain: "Bots", desc: "Автоматизация сбора заявок, напоминаний и опросов после мероприятий в Telegram.", metrics: [["Users", "10K"], ["Conversion", "85%"]] },
+interface Project {
+  title: string; domain: string; desc: string; metrics: string[][];
+  goals: string[]; work: string[]; stack: string[]; artifacts: string[];
+  images?: string[];
+}
+
+const PROJECTS: Project[] = [
+  {
+    title: "АИ продукты для финтеха", domain: "Fintech",
+    desc: "Автоматизация скоринга и оценки LTV корпоратов. Внедрение ML-моделей в банковский контур.",
+    metrics: [["Точность", "+24%"], ["Decision time", "−40%"]],
+    goals: ["Автоматизировать кредитный скоринг корпоративных клиентов", "Снизить время рассмотрения заявок за счёт ML-моделей", "Интегрировать модели в существующий банковский конвейер без остановки операций"],
+    work: ["Сбор бизнес-требований от credit-команды (BRD, SRS)", "Проектирование интеграций ML-сервиса с АБС через Kafka", "Формализация фичей и целевых переменных для скоринговых моделей", "Сопровождение пилота: A/B тест vs. экспертного скоринга", "Разработка SLA и мониторинга качества модели в продакшене"],
+    stack: ["Kafka", "REST API", "SQL", "Python", "Confluence/Jira"],
+    artifacts: ["IT_Research_v2.docx"],
+  },
+  {
+    title: "Private LLM сервис", domain: "AI & Security",
+    desc: "Изолированная LLM-инфраструктура с RAG-архитектурой. Защита данных и поиск по базе знаний 100K+.",
+    metrics: [["Data Privacy", "100%"], ["Search speed", "↑8×"]],
+    goals: ["Развернуть изолированную LLM без облачных зависимостей и утечек", "Реализовать RAG-поиск по корпоративной базе знаний 100K+ документов", "Обеспечить zero-leak политику данных и ролевой доступ"],
+    work: ["Архитектура RAG-системы: векторная БД + fine-tuned LLM", "ТЗ на изолированный деплой в on-prem контуре (air-gap)", "Проектирование пайплайна индексации и актуализации 100K+ документов", "Use Cases для конечных пользователей: поиск, summarization, Q&A", "Интеграция с Active Directory для ролевого доступа к базе знаний"],
+    stack: ["LLM/RAG", "Vector DB", "Python", "Docker", "REST API"],
+    artifacts: [],
+  },
+  {
+    title: "Hybrid Compliance System", domain: "LegalTech",
+    desc: "Программно-аппаратный комплекс мониторинга. Интеграция IoT-датчиков и автоматизация отчётности.",
+    metrics: [["Штрафы", "−40%"], ["Объектов", "50+"]],
+    goals: ["Автоматизировать мониторинг соответствия нормативным требованиям регулятора", "Интегрировать IoT-датчики в систему отчётности объектов", "Снизить количество штрафных санкций на 40% за счёт превентивного контроля"],
+    work: ["Анализ нормативной базы и требований регулятора к отчётности", "Разработка BPMN-схем процессов мониторинга объектов", "ТЗ на интеграцию IoT-датчиков с программным ядром комплекса", "Проектирование модуля автогенерации регуляторных отчётов", "Согласование с юридическим и ИТ-подразделениями"],
+    stack: ["IoT", "BPMN 2.0", "REST API", "Python", "Confluence"],
+    artifacts: ["Process_Diagram.jpg"],
+  },
+  {
+    title: "Анонимизатор мед-данных", domain: "MedTech",
+    desc: "NLP-сервис обезличивания ПДн в документах. Соответствие ФЗ-152 и международным стандартам.",
+    metrics: [["Утечки", "0"], ["Accuracy", "99.8%"]],
+    goals: ["Обеспечить соответствие ФЗ-152 и GDPR при обработке медицинских ПДн", "Автоматически обезличивать документы без ручной разметки", "Встроить сервис в существующий документооборот МИС"],
+    work: ["Анализ требований ФЗ-152, HIPAA, GDPR для медицинских данных", "Описание NLP-пайплайна для распознавания и маскирования ПДн", "Проектирование API-интеграции с медицинской информационной системой", "Тестовая матрица для верификации качества анонимизации", "Процессы аудита и логирования операций с ПДн"],
+    stack: ["NLP/Python", "REST API", "SQL", "Confluence"],
+    artifacts: [],
+  },
+  {
+    title: "SaaS для горнолыжек и отелей", domain: "HoReCa",
+    desc: "ERP-система: ски-пасс, бронирование, прокат. Логика динамического ценообразования.",
+    metrics: [["RevPAR", "+18%"], ["Users", "10K+"]],
+    goals: ["Создать единую ERP для управления ски-курортом и отелями", "Реализовать динамическое ценообразование для максимизации RevPAR", "Обеспечить бесшовную интеграцию ски-пасс, бронирования и проката"],
+    work: ["Конкурентное исследование рынка: анализ 5 зарубежных продуктов", "Описание модулей: ски-пасс, бронирование номеров, прокат оборудования", "Алгоритм динамического ценообразования на основе загрузки (BRD)", "ER-диаграмма и схема БД для 10K+ одновременных пользователей", "Координация трёх команд: бэкенд, мобайл, бизнес-аналитика"],
+    stack: ["PostgreSQL", "REST API", "Python", "Figma", "Jira"],
+    artifacts: [],
+  },
+  {
+    title: "Оптимизация SQL/Python дашбордов", domain: "Analytics",
+    desc: "Рефакторинг системы отчётности. Оптимизация тяжёлых запросов и перенос расчётов на бэкенд.",
+    metrics: [["Скорость", "↑12×"], ["Query cost", "−30%"]],
+    goals: ["Сократить время генерации аналитических отчётов в 10+ раз", "Снизить нагрузку на производственную базу данных", "Перенести тяжёлые вычисления с BI-слоя на Python-бэкенд"],
+    work: ["Аудит SQL-запросов: EXPLAIN ANALYZE, выявление узких мест", "Рефакторинг витрин данных: materialized views, партиционирование, индексы", "Перенос аналитических вычислений в Python-сервис с кэшированием", "Внедрение инкрементальных обновлений через dbt", "Документация новой архитектуры и обучение аналитической команды"],
+    stack: ["PostgreSQL", "Python", "dbt", "Power BI", "SQL"],
+    artifacts: ["IT_Research_v2.docx"],
+  },
+  {
+    title: "SaaS для стоматологий", domain: "HealthCare",
+    desc: "CRM/ERP: электронные карты, складской учёт, расчёт зарплат и графиков врачей.",
+    metrics: [["Клиник", "350+"], ["Retention", "+25%"]],
+    goals: ["Централизовать ведение клиентской базы для 350+ клиник", "Автоматизировать расчёт зарплат и управление графиками врачей", "Улучшить retention через онлайн-сервис и умные напоминания пациентам"],
+    work: ["Доменная модель: пациент, врач, карта, склад, финансы", "User Story Map для 4 ролей (пациент, врач, администратор, владелец)", "Проектирование модуля складского учёта и списания материалов", "REST API спецификация (OpenAPI 3.0) для мобильного приложения", "Координация releases для 350+ активных клиник без downtime"],
+    stack: ["REST API", "SQL", "Figma", "Confluence", "BPMN"],
+    artifacts: ["Тете.pdf"],
+  },
+  {
+    title: "Мессенджер для бизнеса", domain: "Communication",
+    desc: "Защищённая платформа с AD-интеграцией, ветками обсуждений и E2E шифрованием.",
+    metrics: [["DAU", "150K"], ["SLA", "99.9%"]],
+    goals: ["Создать защищённую корпоративную платформу коммуникаций", "Интегрировать платформу с корпоративным Active Directory", "Обеспечить SLA 99.9% при пиковой нагрузке 150K DAU"],
+    work: ["Описание высоконагруженной архитектуры (CQRS, Event Sourcing)", "Проектирование E2E-шифрования: TLS + Application-level шифрование", "Use Cases: ветки обсуждений, каналы, реакции, файлообмен", "Спецификация LDAP-интеграции с Active Directory", "Сценарии нагрузочного тестирования и SLA-документ"],
+    stack: ["WebSocket", "Kafka", "E2E Encryption", "REST API", "LDAP/AD"],
+    artifacts: [],
+  },
+  {
+    title: "Микросервисный паттерн заводов", domain: "E-com",
+    desc: "ETL-система сбора данных и синхронизации остатков с маркетплейсами в реальном времени.",
+    metrics: [["SKU", "1M+"], ["Frequency", "15m"]],
+    goals: ["Синхронизировать 1M+ SKU с маркетплейсами в режиме реального времени", "Реализовать ETL-пайплайн с частотой обновления 15 минут", "Гарантировать idempotency и корректность при сетевых сбоях"],
+    work: ["Анализ API маркетплейсов: Ozon, Wildberries, Яндекс.Маркет", "Проектирование ETL-архитектуры на базе Apache Kafka", "Схема трансформации данных и нормализации SKU-атрибутов", "Механизм idempotency и retry-логика при сбоях", "SLA-документ на синхронизацию и обработку ошибок"],
+    stack: ["Kafka", "ETL/Python", "REST API", "PostgreSQL", "Docker"],
+    artifacts: ["Process_Diagram.jpg"],
+  },
+  {
+    title: "Обновление товарной сетки", domain: "Retail",
+    desc: "Автоматизация маппинга товаров между магазином и витринами маркетплейсов.",
+    metrics: [["Error rate", "−90%"], ["Time-to-market", "−50%"]],
+    goals: ["Автоматизировать маппинг товаров между внутренней БД и витринами", "Снизить процент ошибок при выгрузке на 90%", "Ускорить time-to-market для новых SKU в 2 раза"],
+    work: ["Описание текущего процесса и точек отказа (BPMN AS-IS)", "Целевой процесс автоматизации (BPMN TO-BE)", "ТЗ на ML-классификатор для автоматического маппинга категорий", "Правила валидации и автокоррекции атрибутов товаров", "Обучение команды и документирование новых процессов"],
+    stack: ["BPMN 2.0", "Python/ML", "SQL", "Confluence", "Jira"],
+    artifacts: [],
+  },
+  {
+    title: "Сервис АИ озвучки", domain: "Media",
+    desc: "TTS/STT интеграция для автоматического дубляжа видеоконтента. Фонетическая коррекция.",
+    metrics: [["Voice cost", "−75%"], ["Languages", "12"]],
+    goals: ["Снизить стоимость производства озвучки в 4 раза", "Автоматический дубляж видео на 12 языков без ручного труда", "Фонетическая коррекция для естественного звучания"],
+    work: ["Архитектура TTS/STT-пайплайна и сравнение провайдеров", "Use Cases для редактора озвучки (продюсер, технический редактор)", "Интеграция с видеохостингом через API: загрузка, замена аудиодорожки", "Модуль фонетической коррекции и постобработки аудио", "Метрики качества и процедура оценки пользователями (MOS-тест)"],
+    stack: ["TTS/STT API", "Python", "REST API", "FFmpeg", "Figma"],
+    artifacts: [],
+  },
+  {
+    title: "Fantasy Football Platform", domain: "SportTech",
+    desc: "Математическая модель подсчёта очков на основе Live-статистики. Геймификация и лидерборды.",
+    metrics: [["MAU", "50K+"], ["Avg session", "14m"]],
+    goals: ["Математически точная модель начисления очков по live-статистике", "Геймификация платформы для удержания MAU 50K+", "Средняя сессия 14+ минут через соревновательные механики"],
+    work: ["Математическая модель начисления очков по позициям (GK, DEF, MID, FWD)", "Интеграция со спортивными API (Opta, Sportradar) для live-данных", "UX-флоу: драфт, трейды, лидерборды, история матчей", "Gamification-механики: лиги, батлы H2H, достижения, стрики", "Когортный анализ retention и оптимизация онбординга"],
+    stack: ["REST API", "PostgreSQL", "Python", "WebSocket", "Figma"],
+    artifacts: ["SportTech_Analytics.jpg"],
+  },
+  {
+    title: "PDF Агрегатор", domain: "SaaS",
+    desc: "Обработка и конвертация документов. Монетизация через Stripe и аналитика поведения.",
+    metrics: [["MRR", "$15K"], ["LTV", "$120"]],
+    goals: ["SaaS для конвертации и обработки PDF без установки ПО", "Монетизация через Stripe: trial → subscription → pay-per-use", "MRR $15K за первый год через SEO и реферальную программу"],
+    work: ["Продуктовое исследование: Jobs To Be Done, карта из 12 конкурентов", "Описание монетизационных пакетов и pricing strategy", "Интеграция Stripe: webhook-события, invoice, subscription flow", "Воронка и когортная аналитика: LTV, churn, NPS", "A/B тест онбординга: 3 варианта первого экрана"],
+    stack: ["Stripe API", "Python", "REST API", "SQL", "Figma"],
+    artifacts: [],
+  },
+  {
+    title: "Сервис для арт-пространств", domain: "Events",
+    desc: "Система бронирования залов, продажи билетов и CRM для управления ивентами.",
+    metrics: [["Load", "+30%"], ["Booking time", "−60%"]],
+    goals: ["CRM + бронирование залов для ивент-операторов в одном окне", "Автоматизировать онлайн-продажу билетов и регистрацию гостей", "Снизить операционные затраты на управление мероприятиями"],
+    work: ["Customer Journey Map для организатора и гостя мероприятия", "Модуль бронирования с calendar-интерфейсом и политиками отмены", "Интеграция с платёжным шлюзом YooKassa", "CRM-модуль: лиды, сделки, история взаимодействий", "Система уведомлений: email, sms, push за 24ч/1ч до события"],
+    stack: ["REST API", "SQL", "Figma", "BPMN", "YooKassa API"],
+    artifacts: [],
+  },
+  {
+    title: "TG-бот регистрации на ивенты", domain: "Bots",
+    desc: "Автоматизация сбора заявок, напоминаний и опросов после мероприятий в Telegram.",
+    metrics: [["Users", "10K"], ["Conversion", "85%"]],
+    goals: ["Автоматизировать сбор заявок через Telegram без сайта", "Конверсия 85%+ из просмотра в завершённую регистрацию", "Автоматические NPS-опросы после мероприятий"],
+    work: ["Conversation flow и сценарии диалога: FSM-диаграмма", "ТЗ на Telegram Bot API: inline-кнопки, команды, deep links", "Модуль автоматических напоминаний за 24ч и 1ч до события", "Форма пост-ивентного опроса с аналитикой NPS и сводными отчётами", "Интеграция с Google Sheets / Airtable для CRM-учёта участников"],
+    stack: ["Telegram Bot API", "Python", "SQL", "Google Sheets API"],
+    artifacts: [],
+  },
 ];
 
 const SKILLS = [
@@ -73,11 +200,40 @@ export default function OsPage() {
   const [finderFolder, setFinderFolder] = useState<string | null>(null);
   const [desktopIconPos, setDesktopIconPos] = useState({ left: 20, top: 56 });
   const [blogIconPos, setBlogIconPos] = useState({ left: 20, top: 150 });
-  const [blogPosts, setBlogPosts] = useState<{ id: string; text: string; date: string; url: string; views?: string }[]>([]);
+  const [blogPosts, setBlogPosts] = useState<{
+    id: string; text: string; date: string; url: string; views?: string;
+    images: string[]; videos: string[];
+    reactions: { emoji: string; count: string }[];
+  }[]>([]);
   const [blogLoading, setBlogLoading] = useState(false);
   const [blogLoaded, setBlogLoaded] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "light";
+    return (localStorage.getItem("os-theme") as "light" | "dark") ??
+      (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  });
+  const [lightbox, setLightbox] = useState<{ type: "image" | "video"; src: string } | null>(null);
+  const [activeProject, setActiveProject] = useState<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
+
+  // Theme persistence
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("os-theme", theme);
+  }, [theme]);
+
+  // Lightbox / project detail — close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setLightbox(null);
+        setWins((p) => ({ ...p, project: { ...p.project, minimized: true } }));
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
 
   // Clock
   useEffect(() => {
@@ -292,6 +448,9 @@ export default function OsPage() {
           </div>
           <div className="mb-right">
             <div className="mb-stat"><div className="dot" />AVAILABLE</div>
+            <button className="mb-theme-btn" onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>
+              {theme === "dark" ? "☀" : "◑"}
+            </button>
             <div className="mb-clock">{clock}</div>
           </div>
         </div>
@@ -429,8 +588,8 @@ export default function OsPage() {
           </div>
           <div className="win-body">
             <div className="wp">
-              {PROJECTS.map(({ title, domain, desc, metrics }) => (
-                <div className="project-item" key={title}>
+              {PROJECTS.map(({ title, domain, desc, metrics }, i) => (
+                <div className="project-item" key={title} onClick={() => { setActiveProject(i); toggleWin("project"); }}>
                   <div className="proj-header">
                     <div className="proj-title-os">{title}</div>
                     <div className="proj-domain-os">{domain}</div>
@@ -438,6 +597,7 @@ export default function OsPage() {
                   <div className="proj-desc-os">{desc}</div>
                   <div className="proj-metrics">
                     {metrics.map(([k, v]) => <span className="proj-metric" key={k}>{k} <span>{v}</span></span>)}
+                    <span className="proj-open-hint">Открыть →</span>
                   </div>
                 </div>
               ))}
@@ -650,35 +810,172 @@ export default function OsPage() {
             )}
             {!blogLoading && blogPosts.map((post) => {
               const d = post.date ? new Date(post.date) : null;
-              const formatted = d ? d.toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" }) : "";
+              const formatted = d
+                ? d.toLocaleString("ru-RU", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
+                : "";
               return (
-                <a
-                  key={post.id}
-                  className="blog-post"
-                  href={post.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <div key={post.id} className="blog-post">
                   <div className="blog-post-meta">
                     {formatted && <span className="blog-post-date">{formatted}</span>}
                     {post.views && <span className="blog-post-views">👁 {post.views}</span>}
                   </div>
-                  <div className="blog-post-text">{post.text || "—"}</div>
-                </a>
+                  {post.videos && post.videos.length > 0 && (
+                    <div className="blog-post-videos">
+                      {post.videos.map((src, i) => (
+                        <div key={i} className="blog-post-video-wrap" onClick={() => setLightbox({ type: "video", src })}>
+                          <video src={src} className="blog-post-video" preload="metadata" muted playsInline />
+                          <div className="blog-post-play-btn">▶</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {post.images && post.images.length > 0 && (
+                    <div className="blog-post-images">
+                      {post.images.slice(0, 4).map((src, i) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={i} src={src} alt="" className="blog-post-img" loading="lazy"
+                          onClick={() => setLightbox({ type: "image", src })} />
+                      ))}
+                    </div>
+                  )}
+                  {post.text && <div className="blog-post-text">{post.text}</div>}
+                  <div className="blog-post-bottom">
+                    {post.reactions && post.reactions.length > 0 && (
+                      <div className="blog-post-reactions">
+                        {post.reactions.map((r, i) => (
+                          <span key={i} className="blog-post-reaction">
+                            {r.emoji} <span>{r.count}</span>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <a href={post.url} target="_blank" rel="noopener noreferrer" className="blog-post-tg-link">
+                      ✈ TG →
+                    </a>
+                  </div>
+                </div>
               );
             })}
             <div className="blog-footer">
-              <a
-                className="blog-tg-btn"
-                href="https://t.me/sleepycoffeem"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a className="blog-tg-btn" href="https://t.me/sleepycoffeem" target="_blank" rel="noopener noreferrer">
                 ✈️ Открыть канал в Telegram
               </a>
             </div>
           </div>
         </div>
+
+        {/* ── PROJECT DETAIL WINDOW ── */}
+        <div
+          className={`os-window${focused === "project" ? " focused" : ""}${wins.project.minimized ? " minimized" : ""}`}
+          style={winStyle("project")}
+          onPointerDown={() => focusWin("project")}
+        >
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "project")}>
+            <div className="win-btns">
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("project")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("project")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("project")} />
+            </div>
+            <div className="win-title">
+              {activeProject !== null ? PROJECTS[activeProject].title : "PROJECT"}
+            </div>
+          </div>
+          {activeProject !== null && (() => {
+            const p = PROJECTS[activeProject];
+            return (
+              <div className="proj-detail-body">
+                <div className="proj-detail-content">
+                  <div className="proj-detail-domain">{p.domain}</div>
+                  <div className="proj-section">
+                    <div className="proj-section-label">// О проекте</div>
+                    <p className="proj-section-text">{p.desc}</p>
+                    {p.images && p.images.length > 0 && (
+                      <div className="proj-images">
+                        {p.images.map((src, idx) => (
+                          <div key={idx} className="proj-image-item" onClick={() => setLightbox({ type: "image", src })}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={src} alt="" />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="proj-section">
+                    <div className="proj-section-label">// Цели</div>
+                    <ul className="proj-goals-list">
+                      {p.goals.map((g, idx) => (
+                        <li key={idx} className="proj-goal-item"><span>→</span>{g}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="proj-section">
+                    <div className="proj-section-label">// Что сделал</div>
+                    <ul className="proj-work-list">
+                      {p.work.map((w, idx) => (
+                        <li key={idx} className="proj-work-item"><span>◆</span>{w}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="proj-section">
+                    <div className="proj-section-label">// Стек</div>
+                    <div className="proj-stack-tags">
+                      {p.stack.map((s) => <span key={s} className="proj-stack-tag">{s}</span>)}
+                    </div>
+                  </div>
+                  <div className="proj-metrics-row">
+                    {p.metrics.map(([k, v]) => (
+                      <div key={k} className="proj-detail-metric">
+                        <div className="proj-detail-metric-val">{v}</div>
+                        <div className="proj-detail-metric-key">{k}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="proj-detail-sidebar">
+                  <div className="proj-sidebar-title">Артефакты проекта</div>
+                  {p.artifacts.length === 0 ? (
+                    <div className="proj-sidebar-empty">Нет прикреплённых файлов</div>
+                  ) : (
+                    p.artifacts.map((name) => {
+                      const art = ARTIFACTS.find((a) => a.name === name);
+                      if (!art) return null;
+                      return (
+                        <div
+                          key={name}
+                          className="proj-sidebar-file"
+                          onClick={() => {
+                            setFinderFolder(art.folder);
+                            setFinderPreview(art.name);
+                            setWins((prev) => ({ ...prev, artifacts: { ...prev.artifacts, minimized: false } }));
+                            focusWin("artifacts");
+                          }}
+                        >
+                          <div className="proj-sidebar-file-icon" data-type={art.type} />
+                          <div className="proj-sidebar-file-name">{art.name}</div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Lightbox */}
+        {lightbox && (
+          <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
+            <div className="lightbox-inner" onClick={(e) => e.stopPropagation()}>
+              <button className="lightbox-close" onClick={() => setLightbox(null)}>✕</button>
+              {lightbox.type === "image" ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={lightbox.src} alt="" className="lightbox-img" />
+              ) : (
+                <video src={lightbox.src} controls autoPlay className="lightbox-video" />
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Dock */}
         <div className="os-dock">

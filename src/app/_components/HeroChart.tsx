@@ -66,17 +66,20 @@ export default function HeroChart() {
 
       // Fill under curve
       const gradFill = ctx.createLinearGradient(0, H, 0, 0);
-      gradFill.addColorStop(0, `rgba(${rgb},0.16)`);
-      gradFill.addColorStop(0.55, `rgba(${rgb},0.05)`);
-      gradFill.addColorStop(1, `rgba(${rgb},0)`);
+      gradFill.addColorStop(0,    `rgba(${rgb},0.7)`);  // низ — тёмнее
+      gradFill.addColorStop(0.4,  `rgba(${rgb},0.3)`);  // быстрее спадает
+      gradFill.addColorStop(1,    `rgba(${rgb},0)`);      // верх прозрачный
+
+      // tension < 0.5 → less smooth (0 = straight lines, 0.5 = full bezier)
+      const tension = 0.22;
 
       ctx.beginPath();
       ctx.moveTo(0, H);
       ctx.lineTo(pts[0].x, pts[0].y);
       for (let i = 1; i < pts.length; i++) {
         const p = pts[i - 1], c = pts[i];
-        const mx = (p.x + c.x) / 2;
-        ctx.bezierCurveTo(mx, p.y, mx, c.y, c.x, c.y);
+        const dx = c.x - p.x;
+        ctx.bezierCurveTo(p.x + dx * tension, p.y, c.x - dx * tension, c.y, c.x, c.y);
       }
       ctx.lineTo(pts[pts.length - 1].x, H);
       ctx.closePath();
@@ -93,8 +96,8 @@ export default function HeroChart() {
       ctx.moveTo(pts[0].x, pts[0].y);
       for (let i = 1; i < pts.length; i++) {
         const p = pts[i - 1], c = pts[i];
-        const mx = (p.x + c.x) / 2;
-        ctx.bezierCurveTo(mx, p.y, mx, c.y, c.x, c.y);
+        const dx = c.x - p.x;
+        ctx.bezierCurveTo(p.x + dx * tension, p.y, c.x - dx * tension, c.y, c.x, c.y);
       }
       ctx.strokeStyle = gradLine;
       ctx.lineWidth = 1.5 * dpr;
