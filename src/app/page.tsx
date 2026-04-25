@@ -318,7 +318,7 @@ export default function Home() {
               <div className="cc-arrow">↓</div>
             </a>
             <a className="contact-card reveal d2" href="https://t.me/SleepyCoffeeT" target="_blank" rel="noopener noreferrer">
-              <div className="cc-icon">✈️</div>
+              <div className="cc-icon" aria-hidden="true">✈️</div>
               <div><div className="cc-label">Telegram</div><div className="cc-val">@SleepyCoffeeT</div></div>
               <div className="cc-arrow">→</div>
             </a>
