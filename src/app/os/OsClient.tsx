@@ -72,6 +72,10 @@ export default function OsPage() {
   const [finderPreview, setFinderPreview] = useState<string | null>(null);
   const [finderFolder, setFinderFolder] = useState<string | null>(null);
   const [desktopIconPos, setDesktopIconPos] = useState({ left: 20, top: 56 });
+  const [blogIconPos, setBlogIconPos] = useState({ left: 20, top: 150 });
+  const [blogPosts, setBlogPosts] = useState<{ id: string; text: string; date: string; url: string; views?: string }[]>([]);
+  const [blogLoading, setBlogLoading] = useState(false);
+  const [blogLoaded, setBlogLoaded] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
 
