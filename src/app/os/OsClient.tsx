@@ -187,6 +187,10 @@ export default function OsPage() {
       setDesktopIconPos({ left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) });
       return;
     }
+    if (drag.id === "desktop-icon-blog") {
+      setBlogIconPos({ left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) });
+      return;
+    }
     setWins((prev) => ({
       ...prev,
       [drag.id]: { ...prev[drag.id], pos: { ...prev[drag.id].pos, left: drag.sl + (e.clientX - drag.sx), top: drag.st + (e.clientY - drag.sy) } },
