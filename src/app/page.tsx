@@ -339,6 +339,7 @@ export default function Home() {
         </div>
       </section>
 
+      </main>
       <footer>
         <div className="footer-left">© 2026 · Артем Козыренко</div>
         <div className="footer-right">Business Analyst · Omsk</div>
