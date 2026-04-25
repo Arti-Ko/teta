@@ -134,7 +134,9 @@ export default function OsPage() {
           dots.push({ x: i * 40, y: j * 40, phase: Math.random() * Math.PI * 2 });
     };
     resize();
-    window.addEventListener("resize", resize);
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const handleResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); };
+    window.addEventListener("resize", handleResize);
 
     const draw = () => {
       if (document.hidden) { rafRef.current = requestAnimationFrame(draw); return; }
