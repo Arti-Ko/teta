@@ -30,8 +30,15 @@ export default function CanvasAnimation() {
     resize();
     window.addEventListener('resize', resize);
 
+    let visible = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => { visible = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    if (canvas.parentElement) observer.observe(canvas.parentElement);
+
     const draw = () => {
-      if (document.hidden) { raf = requestAnimationFrame(draw); return; }
+      if (document.hidden || !visible) { raf = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, W, H);
 
       for (const p of particles) {
@@ -53,11 +60,11 @@ export default function CanvasAnimation() {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
+          if (dist < 80) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.07 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.07 * (1 - dist / 80)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -68,7 +75,11 @@ export default function CanvasAnimation() {
     };
 
     raf = requestAnimationFrame(draw);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      observer.disconnect();
+    };
   }, []);
 
   return (
