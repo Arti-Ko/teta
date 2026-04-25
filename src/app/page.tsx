@@ -55,6 +55,8 @@ export default function Home() {
       <main id="main-content">
       {/* ── HERO ── */}
       <section id="hero">
+        <HeroChart />
+        <div className="hero-content">
         <div className="hero-chip">
           <div className="chip-dot" />
           Открыт к новым проектам
