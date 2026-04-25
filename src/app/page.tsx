@@ -228,7 +228,7 @@ export default function Home() {
               <div className="pr-left">
                 <div className="pr-domain">LegalTech · Hybrid</div>
                 <div className="pr-title">Hybrid Compliance System</div>
-                <div className="pr-desc">Программно-аппаратный комплекс мониторинга соответствия требованиям. Интеграция IoT-датчиков и автоматизация отчётности. Снижение штрафных рисков на 40% по 50+ объектам.</div>
+                <div className="pr-desc">Штрафные риски снижены на 40% по 50+ объектам — за счёт автоматизации комплаенс-мониторинга. IoT-датчики, автоматическая отчётность и BPMN-процессы заменили ручные проверки.</div>
                 <div className="pr-chips"><span className="pr-chip">IoT</span><span className="pr-chip">Kafka</span><span className="pr-chip">BPMN</span><span className="pr-chip">Python</span></div>
               </div>
               <div className="pr-right"><div className="pr-metric-big">−40%</div><div className="pr-metric-label">Штрафные риски</div><div className="pr-arrow">↗</div></div>
