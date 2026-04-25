@@ -159,7 +159,7 @@ export default function OsPage() {
       rafRef.current = requestAnimationFrame(draw);
     };
     rafRef.current = requestAnimationFrame(draw);
-    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", resize); };
+    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", handleResize); clearTimeout(resizeTimer); };
   }, []);
 
   // Drag — Pointer Events API (mouse, touch, stylus unified)
