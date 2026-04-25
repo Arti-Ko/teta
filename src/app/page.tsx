@@ -201,7 +201,7 @@ export default function Home() {
               <div className="pr-left">
                 <div className="pr-domain">Fintech · Tier-1 Enterprise</div>
                 <div className="pr-title">AI-инфраструктура кредитного скоринга</div>
-                <div className="pr-desc">Проектирование и внедрение предиктивных ML-моделей в банковский контур. Автоматизация цепочки принятия решений: от заявки до выдачи без участия операциониста. BPMN-модели, интеграция с БКИ и скоринговыми системами.</div>
+                <div className="pr-desc">Точность скоринга выросла с 71% до 95% — за счёт внедрения ML-моделей в банковский кредитный конвейер. Спроектировал полную цепочку: от заявки до выдачи без операциониста. BPMN-модели, интеграция с БКИ и Kafka.</div>
                 <div className="pr-chips"><span className="pr-chip">MLOps</span><span className="pr-chip">System Design</span><span className="pr-chip">BPMN</span><span className="pr-chip">Kafka</span></div>
               </div>
               <div className="pr-right"><div className="pr-metric-big">+24%</div><div className="pr-metric-label">Точность прогнозов</div><div className="pr-arrow">↗</div></div>
