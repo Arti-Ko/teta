@@ -59,18 +59,21 @@ export default function Home() {
           <span className="dim">Козыренко</span>
         </h1>
         <p className="hero-sub reveal d1 visible">
-          <strong>Senior Business Analyst.</strong> Превращаю сложные бизнес-задачи в чёткие системные решения.
-          Финтех, ретейл, платформы.
+          <strong>Senior Business Analyst с инженерным бэкграундом.</strong> Проектирую AI-продукты,
+          финтех-системы и высоконагруженные платформы на стыке бизнеса и архитектуры.
         </p>
         <div className="hero-actions reveal d2 visible">
           <a href="#projects" className="btn btn-primary">Смотреть проекты ↓</a>
           <a href="#contact" className="btn btn-ghost">Написать мне</a>
         </div>
         <div className="hero-stats reveal d3 visible">
-          <div className="hstat"><span className="hstat-num">4+</span><span className="hstat-label">Лет опыта</span></div>
-          <div className="hstat"><span className="hstat-num">15+</span><span className="hstat-label">Проектов</span></div>
-          <div className="hstat"><span className="hstat-num">8</span><span className="hstat-label">Доменов</span></div>
+          <div className="hstat"><span className="hstat-num">+24%</span><span className="hstat-label">Точность ML-скоринга</span></div>
+          <div className="hstat"><span className="hstat-num">↑8×</span><span className="hstat-label">Скорость поиска LLM/RAG</span></div>
+          <div className="hstat"><span className="hstat-num">−40%</span><span className="hstat-label">Штрафные риски</span></div>
         </div>
+        <p className="hero-os-hint reveal d3 visible">
+          Также есть <Link href="/os" className="hero-os-link">интерактивное резюме в формате ОС →</Link>
+        </p>
       </section>
 
       {/* ── ABOUT ── */}
