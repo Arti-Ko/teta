@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="portfolio-page">
+      <a href="#hero" className="skip-to-content">Перейти к содержимому</a>
+
       {/* Scroll progress bar */}
       <div id="scrollBar" className="scroll-progress" />
 
