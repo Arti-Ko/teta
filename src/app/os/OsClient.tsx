@@ -20,6 +20,7 @@ const DEFAULTS: Record<string, WinState> = {
   projects:  { minimized: false, zIndex: 20, maxed: false, pos: { left: 60,  top: 450, width: 520, height: 380 } },
   contact:   { minimized: false, zIndex: 19, maxed: false, pos: { left: 560, top: 430, width: 340 } },
   artifacts: { minimized: true,  zIndex: 18, maxed: false, pos: { left: 120, top: 60,  width: 680, height: 500 } },
+  blog:      { minimized: true,  zIndex: 17, maxed: false, pos: { left: 200, top: 80,  width: 460, height: 520 } },
 };
 
 const BOOT_LABELS = ["KERNEL LOADED", "PROFILE DATABASE", "SKILL INDEX", "PROJECT ARCHIVE", "INTERFACE READY"];
