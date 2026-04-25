@@ -219,7 +219,7 @@ export default function Home() {
               <div className="pr-left">
                 <div className="pr-domain">HealthCare · SaaS</div>
                 <div className="pr-title">CRM/ERP для сети стоматологий</div>
-                <div className="pr-desc">Полный цикл от Discovery до запуска: электронные карты пациентов, складской учёт, расчёт зарплат и графиков врачей, интеграция с ЕГИСЗ. Проект с нуля под 350+ клиник одновременно.</div>
+                <div className="pr-desc">SaaS-платформа запущена на 350+ клиниках одновременно — полный цикл от Discovery до продакшена. Электронные карты пациентов, складской учёт, зарплатный расчёт, интеграция с ЕГИСЗ.</div>
                 <div className="pr-chips"><span className="pr-chip">ERP</span><span className="pr-chip">CRM</span><span className="pr-chip">SQL</span><span className="pr-chip">Confluence</span></div>
               </div>
               <div className="pr-right"><div className="pr-metric-big">350+</div><div className="pr-metric-label">Клиник на платформе</div><div className="pr-arrow">↗</div></div>
