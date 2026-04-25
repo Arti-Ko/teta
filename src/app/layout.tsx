@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
+    locale: "ru_RU",
     siteName: "Артем Козыренко",
     title: "Артем Козыренко — Senior Business Analyst",
     description: "Senior BA. Финтех, AI/ML, SaaS-платформы. 4+ года, 15+ проектов.",
@@ -46,6 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Артем Козыренко — Senior Business Analyst",
     description: "Senior BA. Финтех, AI/ML, SaaS-платформы. 4+ года, 15+ проектов.",
+    images: [{ url: "/opengraph-image", alt: "Артем Козыренко — Senior Business Analyst" }],
   },
   robots: { index: true, follow: true },
   verification: { google: "-Ecb7X2duBqC67zqkRcgCEVmf55-T5VBiAVpJ7lFwoI" },
