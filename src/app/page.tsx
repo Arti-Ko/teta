@@ -327,8 +327,8 @@ export default function Home() {
               <div><div className="cc-label">Telegram Канал</div><div className="cc-val">Заметки BA/SA · @sleepycoffeem</div></div>
               <div className="cc-arrow">→</div>
             </a>
-            <a className="contact-card reveal d1" href="https://linkedin.com/in/kozyrenko" target="_blank" rel="noopener noreferrer">
-              <div className="cc-icon">💼</div>
+            <a className="contact-card reveal d1" href="https://www.linkedin.com/in/kozyrenko" target="_blank" rel="noopener noreferrer">
+              <div className="cc-icon" aria-hidden="true">💼</div>
               <div><div className="cc-label">LinkedIn</div><div className="cc-val">linkedin.com/in/kozyrenko</div></div>
               <div className="cc-arrow">→</div>
             </a>
