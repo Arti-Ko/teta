@@ -81,7 +81,7 @@ export default function Home() {
         <div className="section-wrap">
           <div className="reveal">
             <div className="section-label">О себе</div>
-            <h2 className="section-title">Аналитик,<br />который думает системно</h2>
+            <h2 className="section-title">От кода —<br />к системному анализу</h2>
           </div>
           <div className="about-grid">
             <div className="about-body reveal d1">
