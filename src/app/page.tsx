@@ -6,14 +6,8 @@ import PortfolioScripts from "./_components/PortfolioScripts";
 import CanvasAnimation from "./_components/CanvasAnimation";
 
 export const metadata: Metadata = {
-  title: "Артем Козыренко — Senior Business Analyst",
   description:
     "Портфолио Senior Business Analyst с 4+ годами опыта. Финтех, AI/ML, SaaS. Т-Банк, Purrweb. 15+ проектов. Открыт к предложениям.",
-  openGraph: {
-    title: "Артем Козыренко — Senior Business Analyst",
-    description:
-      "Senior Business Analyst. Финтех, AI/ML, SaaS-платформы. 4+ года, 15+ проектов.",
-  },
 };
 
 export default function Home() {
