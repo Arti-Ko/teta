@@ -19,7 +19,7 @@ export default function Home() {
       {/* Scroll to top */}
       <button id="toTopBtn" className="to-top-btn" aria-label="Наверх">↑</button>
 
-      <Link href="/os" className="fab-os">
+      <Link href="/os" className="fab-os" title="Интерактивное резюме в формате ОС">
         <div className="os-indicator" />
         ЗАПУСТИТЬ ОС
       </Link>
