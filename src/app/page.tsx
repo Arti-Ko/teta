@@ -81,6 +81,7 @@ export default function Home() {
         <p className="hero-os-hint reveal d3 visible">
           Также есть <Link href="/os" className="hero-os-link">интерактивное резюме в формате ОС →</Link>
         </p>
+        </div>
       </section>
 
       {/* ── ABOUT ── */}
