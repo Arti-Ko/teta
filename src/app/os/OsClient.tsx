@@ -619,6 +619,67 @@ export default function OsPage() {
           </div>
         </div>
 
+        {/* ── BLOG WINDOW ── */}
+        <div
+          className={`os-window${focused === "blog" ? " focused" : ""}${wins.blog.minimized ? " minimized" : ""}`}
+          style={winStyle("blog")}
+          onPointerDown={() => focusWin("blog")}
+        >
+          <div className="win-titlebar" onPointerDown={(e) => onTitlebarDown(e, "blog")}>
+            <div className="win-btns">
+              <button className="win-btn close" aria-label="Закрыть" onClick={() => closeWin("blog")} />
+              <button className="win-btn min"   aria-label="Свернуть" onClick={() => closeWin("blog")} />
+              <button className="win-btn max"   aria-label="Развернуть" onClick={() => toggleMax("blog")} />
+            </div>
+            <div className="win-title">BLOG.tg</div>
+            <button className="blog-refresh-btn" onClick={fetchBlog} title="Обновить">↻</button>
+          </div>
+          <div className="win-body blog-win-body">
+            {blogLoading && (
+              <div className="blog-state">
+                <div className="blog-state-icon">⟳</div>
+                <div className="blog-state-text">Загрузка постов…</div>
+              </div>
+            )}
+            {!blogLoading && blogPosts.length === 0 && blogLoaded && (
+              <div className="blog-state">
+                <div className="blog-state-icon">✈️</div>
+                <div className="blog-state-text">Посты не загрузились</div>
+                <div className="blog-state-hint">Нажмите ↻ для повторной попытки</div>
+              </div>
+            )}
+            {!blogLoading && blogPosts.map((post) => {
+              const d = post.date ? new Date(post.date) : null;
+              const formatted = d ? d.toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" }) : "";
+              return (
+                <a
+                  key={post.id}
+                  className="blog-post"
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="blog-post-meta">
+                    {formatted && <span className="blog-post-date">{formatted}</span>}
+                    {post.views && <span className="blog-post-views">👁 {post.views}</span>}
+                  </div>
+                  <div className="blog-post-text">{post.text || "—"}</div>
+                </a>
+              );
+            })}
+            <div className="blog-footer">
+              <a
+                className="blog-tg-btn"
+                href="https://t.me/sleepycoffeem"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ✈️ Открыть канал в Telegram
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Dock */}
         <div className="os-dock">
           {[
