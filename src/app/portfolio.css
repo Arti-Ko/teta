@@ -505,6 +505,66 @@
   color: var(--ink3);
 }
 
+/* ── HERO CHART ───────────────────────────────────────────── */
+#hero { overflow: hidden; }
+
+.hero-chart-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ── THEME TOGGLE ─────────────────────────────────────────── */
+.theme-toggle {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink2);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  line-height: 1;
+}
+.theme-toggle:hover { background: var(--bg); color: var(--ink); }
+
+/* ── DARK MODE — dot pattern ──────────────────────────────── */
+[data-theme="dark"] .portfolio-page::before {
+  background-image: radial-gradient(circle, #3A3A38 1px, transparent 1px);
+  opacity: 0.5;
+}
+
+/* ── DARK MODE — about section ────────────────────────────── */
+[data-theme="dark"] #about { background: var(--white); }
+
+/* ── DARK MODE — skill card icon bg ──────────────────────── */
+[data-theme="dark"] .sc-icon { background: var(--bg); }
+
+/* ── DARK MODE — to-top button ───────────────────────────── */
+[data-theme="dark"] .to-top-btn { background: var(--white); border-color: var(--border); color: var(--ink2); }
+[data-theme="dark"] .to-top-btn:hover { background: var(--bg); }
+
+/* ── DARK MODE — nav active ──────────────────────────────── */
+[data-theme="dark"] .nav-links a.nav-active { background: var(--white); }
+[data-theme="dark"] .nav-links a:hover { background: var(--white); }
+
 /* ── PREFERS REDUCED MOTION ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
@@ -514,4 +574,5 @@
   }
   .os-indicator, .os-indicator-red, .ap-dot { animation: none !important; }
   .scroll-progress { transition: none !important; }
+  .hero-chart-canvas { display: none; }
 }
