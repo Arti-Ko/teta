@@ -4,6 +4,8 @@ import Image from "next/image";
 import "./portfolio.css";
 import PortfolioScripts from "./_components/PortfolioScripts";
 import CanvasAnimation from "./_components/CanvasAnimation";
+import HeroChart from "./_components/HeroChart";
+import ThemeToggle from "./_components/ThemeToggle";
 
 export const metadata: Metadata = {
   description:
