@@ -301,7 +301,7 @@ export default function Home() {
             <div className="avail-pill"><div className="ap-dot" />Открыт к предложениям</div>
             <div className="section-label">Контакт</div>
             <h2 className="section-title">Давайте&nbsp;поговорим</h2>
-            <p className="section-desc">Открыт для новых проектов, консультаций и интересных задач. Отвечаю в течение 24 часов.</p>
+            <p className="section-desc">Ищу сложные проекты на стыке аналитики и системного проектирования: финтех, AI/ML, высоконагруженные платформы. Контракт или штат — рассматриваю оба формата. Отвечаю в течение 24 часов.</p>
           </div>
           <div className="contact-grid">
             <a className="contact-card reveal d1" id="copyEmail" href="mailto:arti.k.renko@gmail.com">
