@@ -688,6 +688,7 @@ export default function OsPage() {
             { id: "projects",  icon: "▦", label: "Projects" },
             { id: "contact",   icon: "◎", label: "Contact" },
             { id: "artifacts", icon: "▤", label: "Артефакты" },
+            { id: "blog",      icon: "✈", label: "Блог" },
           ].map(({ id, icon, label }) => (
             <div
               key={id}
