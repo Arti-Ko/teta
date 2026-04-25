@@ -40,6 +40,7 @@ export default function Home() {
           <li><a href="#stack">Стек</a></li>
           <li><a href="#contact" className="nav-cta">Написать</a></li>
         </ul>
+        <ThemeToggle />
         <button className="nav-burger" id="navBurger" aria-label="Открыть меню" aria-expanded="false">
           <span /><span /><span />
         </button>
