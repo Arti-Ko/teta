@@ -305,7 +305,7 @@ export default function Home() {
           </div>
           <div className="contact-grid">
             <a className="contact-card reveal d1" id="copyEmail" href="mailto:arti.k.renko@gmail.com">
-              <div className="cc-icon">✉️</div>
+              <div className="cc-icon" aria-hidden="true">✉️</div>
               <div>
                 <div className="cc-label">Email</div>
                 <div className="cc-val" id="emailText">arti.k.renko@gmail.com</div>
