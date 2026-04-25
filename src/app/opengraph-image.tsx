@@ -32,7 +32,7 @@ export default function Image() {
         </div>
         <div style={{ display: "flex" }}>
           <span style={{ color: "#888888", fontSize: "24px" }}>
-            Финтех · Ретейл · Данные · 6+ лет · 34 проекта
+            Финтех · AI/ML · SaaS · 4+ года · 15+ проектов
           </span>
         </div>
       </div>
