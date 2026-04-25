@@ -300,7 +300,7 @@ export default function Home() {
             <p className="section-desc">Открыт для новых проектов, консультаций и интересных задач. Отвечаю в течение 24 часов.</p>
           </div>
           <div className="contact-grid">
-            <a className="contact-card reveal d1" id="copyEmail" href="#contact">
+            <a className="contact-card reveal d1" id="copyEmail" href="mailto:arti.k.renko@gmail.com">
               <div className="cc-icon">✉️</div>
               <div>
                 <div className="cc-label">Email</div>
