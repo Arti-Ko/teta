@@ -598,6 +598,8 @@
   padding: 0;
 }
 
+
+
 .blog-state {
   display: flex;
   flex-direction: column;
@@ -849,7 +851,10 @@
 [data-theme="dark"] .skill-bar-inner { background: #E0DFD9; }
 [data-theme="dark"] .skill-name-s { color: #A0A09A; }
 [data-theme="dark"] .fab-exit { background: #1a1a18; border-color: rgba(255,255,255,0.1); }
-
+[data-theme="dark"] .finder-download-btn { background: #111110; }
+[data-theme="dark"] .finder-download-btn-lg { background: #111110; }
+[data-theme="dark"] .skill-cat-header { color: white; }
+[data-theme="dark"] .blog-tg-btn { background: #111110; }
 /* ── PROJECT DETAIL WINDOW ── */
 .proj-detail-body {
   display: flex;
