@@ -120,7 +120,7 @@ export default function Home() {
               </div>
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
-                <div><div className="tv-year">2025</div><div className="tv-role">Business Analyst</div><div className="tv-co">Т-Банк · Fintech Ecosystem</div></div>
+                <div><div className="tv-year">2025 · контракт</div><div className="tv-role">Business Analyst</div><div className="tv-co">Т-Банк · Fintech Ecosystem</div></div>
               </div>
               <div className="tv-item">
                 <div className="tv-dot-col"><div className="tv-dot" /><div className="tv-line" /></div>
