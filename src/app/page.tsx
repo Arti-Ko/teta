@@ -50,6 +50,7 @@ export default function Home() {
         <a href="#contact" className="mobile-link mobile-cta">Написать</a>
       </div>
 
+      <main id="main-content">
       {/* ── HERO ── */}
       <section id="hero">
         <div className="hero-chip">
