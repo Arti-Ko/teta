@@ -313,7 +313,7 @@ export default function Home() {
               <div className="cc-arrow">→</div>
             </a>
             <a className="contact-card reveal d1" href="/pdf.pdf" download="Resume_Artem_Kozyrenko.pdf">
-              <div className="cc-icon">🧾</div>
+              <div className="cc-icon" aria-hidden="true">🧾</div>
               <div><div className="cc-label">Резюме</div><div className="cc-val">Скачать PDF</div></div>
               <div className="cc-arrow">↓</div>
             </a>
