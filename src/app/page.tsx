@@ -210,7 +210,7 @@ export default function Home() {
               <div className="pr-left">
                 <div className="pr-domain">AI & Security</div>
                 <div className="pr-title">Private LLM сервис с RAG-архитектурой</div>
-                <div className="pr-desc">Изолированная LLM-инфраструктура с векторным поиском по базе знаний 100K+ документов. Защита данных, zero-trust периметр, интеграция в корпоративный контур без утечки данных во внешние API.</div>
+                <div className="pr-desc">Поиск по базе в 100K+ документов ускорился в 8 раз после замены полнотекстового поиска на векторный RAG. Инфраструктура изолирована: zero-trust периметр, данные не покидают корпоративный контур.</div>
                 <div className="pr-chips"><span className="pr-chip">LLM</span><span className="pr-chip">RAG</span><span className="pr-chip">REST API</span><span className="pr-chip">OpenAPI</span></div>
               </div>
               <div className="pr-right"><div className="pr-metric-big">↑8×</div><div className="pr-metric-label">Скорость поиска</div><div className="pr-arrow">↗</div></div>
