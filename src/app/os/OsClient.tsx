@@ -311,6 +311,22 @@ export default function OsPage() {
           <div className="desktop-icon-label">Артефакты</div>
         </div>
 
+        {/* ── BLOG FOLDER ICON ── */}
+        <div
+          className="desktop-icon"
+          style={{ left: blogIconPos.left, top: blogIconPos.top }}
+          onPointerDown={(e) => {
+            setBlogIconPos((p) => p);
+            setDrag({ id: "desktop-icon-blog", sx: e.clientX, sy: e.clientY, sl: blogIconPos.left, st: blogIconPos.top });
+            (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+            e.preventDefault();
+          }}
+          onDoubleClick={() => toggleWin("blog")}
+        >
+          <div className="desktop-folder-icon blog-folder-icon" />
+          <div className="desktop-icon-label">Блог</div>
+        </div>
+
         {/* ── PROFILE WINDOW ── */}
         <div
           className={`os-window${focused === "profile" ? " focused" : ""}${wins.profile.minimized ? " minimized" : ""}`}
