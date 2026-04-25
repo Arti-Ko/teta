@@ -167,6 +167,19 @@ export default function OsPage() {
     return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener("resize", handleResize); clearTimeout(resizeTimer); };
   }, []);
 
+  // Blog fetch — runs once when blog window first opens
+  const fetchBlog = useCallback(() => {
+    setBlogLoading(true);
+    fetch("/api/tg-feed")
+      .then((r) => r.json())
+      .then((d) => { setBlogPosts(d.posts ?? []); setBlogLoading(false); setBlogLoaded(true); })
+      .catch(() => { setBlogLoading(false); setBlogLoaded(true); });
+  }, []);
+
+  useEffect(() => {
+    if (!wins.blog?.minimized && !blogLoaded) fetchBlog();
+  }, [wins.blog?.minimized, blogLoaded, fetchBlog]);
+
   // Drag — Pointer Events API (mouse, touch, stylus unified)
   const onPointerMove = useCallback((e: PointerEvent) => {
     if (!drag) return;
