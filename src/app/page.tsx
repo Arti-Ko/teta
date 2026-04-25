@@ -194,7 +194,7 @@ export default function Home() {
           <div className="reveal">
             <div className="section-label">Кейсы</div>
             <h2 className="section-title">Избранные проекты</h2>
-            <p className="section-desc">Реальные задачи, реальные результаты.</p>
+            <p className="section-desc">Четыре кейса с измеримыми результатами.</p>
           </div>
           <div className="projects-list">
             <div className="proj-row reveal d1">
