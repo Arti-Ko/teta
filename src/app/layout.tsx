@@ -59,10 +59,17 @@ const jsonLd = {
   name: "Артем Козыренко",
   jobTitle: "Senior Business Analyst",
   url: siteUrl,
-  sameAs: ["https://t.me/SleepyCoffeeT", "https://linkedin.com/in/kozyrenko"],
+  image: `${siteUrl}/avatar.jpg`,
+  sameAs: ["https://t.me/SleepyCoffeeT", "https://www.linkedin.com/in/kozyrenko"],
   email: "arti.k.renko@gmail.com",
   address: { "@type": "PostalAddress", addressLocality: "Omsk", addressCountry: "RU" },
-  knowsAbout: ["Business Analysis", "BPMN", "BABOK", "SQL", "Kafka", "REST API", "Data Governance"],
+  knowsAbout: [
+    "Business Analysis", "Systems Analysis", "BABOK", "BPMN 2.0", "UML", "ArchiMate", "TOGAF",
+    "Requirements Engineering", "User Story", "Use Case", "BDD", "Agile", "SAFe", "Scrum",
+    "SQL", "Python", "Power BI", "dbt", "Data Governance",
+    "REST API", "OpenAPI", "Kafka", "gRPC", "Fintech", "AI/ML", "LLM", "RAG", "SaaS",
+    "Confluence", "Jira", "Miro", "Figma",
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
