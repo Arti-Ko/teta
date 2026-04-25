@@ -577,3 +577,149 @@
   transition: opacity 0.12s;
 }
 .finder-download-btn-lg:hover { opacity: 0.78; }
+
+/* ── BLOG FOLDER ICON ── */
+.blog-folder-icon {
+  background: linear-gradient(160deg, #a8d8a8 0%, #2e7d32 100%);
+  box-shadow: 0 4px 14px rgba(46,125,50,0.45), inset 0 1px 0 rgba(255,255,255,0.28);
+}
+.blog-folder-icon::before {
+  background: linear-gradient(160deg, #c8e6c9 0%, #66bb6a 100%);
+}
+.blog-folder-icon::after { content: "✈"; color: rgba(255,255,255,0.85); }
+
+/* ── BLOG WINDOW ── */
+.blog-win-body {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--os-border) transparent;
+  padding: 0;
+}
+
+.blog-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 48px 24px;
+  color: var(--os-text-dim);
+}
+.blog-state-icon { font-size: 28px; }
+.blog-state-text { font-family: var(--os-mono); font-size: 11px; letter-spacing: 0.06em; }
+.blog-state-hint { font-family: var(--os-mono); font-size: 9px; opacity: 0.6; }
+
+.blog-post {
+  display: block;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--os-border2);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.12s;
+  cursor: pointer;
+}
+.blog-post:hover { background: var(--os-blue-glow); }
+
+.blog-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.blog-post-date {
+  font-family: var(--os-mono);
+  font-size: 9px;
+  color: var(--os-text-dim);
+  letter-spacing: 0.06em;
+}
+.blog-post-views {
+  font-family: var(--os-mono);
+  font-size: 9px;
+  color: var(--os-text-dim);
+}
+.blog-post-text {
+  font-size: 12px;
+  color: var(--os-text-mid);
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-refresh-btn {
+  background: none;
+  border: none;
+  color: var(--os-text-dim);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  margin-left: auto;
+  transition: color 0.15s, transform 0.3s;
+}
+.blog-refresh-btn:hover { color: var(--os-text); transform: rotate(180deg); }
+
+.blog-footer {
+  padding: 16px 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--os-border2);
+  flex-shrink: 0;
+}
+.blog-tg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--os-text);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--os-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.blog-tg-btn:hover { opacity: 0.8; }
+
+/* ── DARK MODE — OS ── */
+[data-theme="dark"] .os-root {
+  --os-bg:        #0A0A09;
+  --os-win:       #141413;
+  --os-win2:      #111110;
+  --os-border:    rgba(255,255,255,0.08);
+  --os-border2:   rgba(255,255,255,0.05);
+  --os-blue:      #a0a0a0;
+  --os-blue-dim:  rgba(255,255,255,0.06);
+  --os-blue-glow: rgba(255,255,255,0.03);
+  --os-text:      #E0DFD9;
+  --os-text-mid:  #A0A09A;
+  --os-text-dim:  #565652;
+}
+[data-theme="dark"] .os-boot {
+  background: #0A0A09;
+}
+[data-theme="dark"] .boot-logo,
+[data-theme="dark"] .boot-lines { color: #E0DFD9; }
+[data-theme="dark"] .boot-bar-wrap { background: #2a2a28; }
+[data-theme="dark"] .boot-bar-fill { background: #E0DFD9; box-shadow: 0 0 12px #E0DFD9; }
+[data-theme="dark"] .os-menubar { background: rgba(10,10,9,0.88); }
+[data-theme="dark"] .mb-logo { color: #E0DFD9; }
+[data-theme="dark"] .os-dock { background: rgba(20,20,18,0.85); }
+[data-theme="dark"] .finder-sidebar { background: rgba(14,14,13,0.7); }
+[data-theme="dark"] .finder-sidebar-footer { background: rgba(14,14,13,0.7); }
+[data-theme="dark"] .finder-iframe { background: #1a1a18; }
+[data-theme="dark"] .ci-icon { background: #1e1e1c; }
+[data-theme="dark"] .profile-avatar { background: #1e1e1c; }
+[data-theme="dark"] .skill-bar-outer { background: #2a2a28; }
+[data-theme="dark"] .skill-bar-inner { background: #E0DFD9; }
+[data-theme="dark"] .skill-name-s { color: #A0A09A; }
+[data-theme="dark"] .fab-exit { background: #1a1a18; border-color: rgba(255,255,255,0.1); }
