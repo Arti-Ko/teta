@@ -82,6 +82,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <head>
         <meta name="theme-color" content="#F7F6F2" />
+        {/* Prevent flash-of-wrong-theme by reading localStorage before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
