@@ -646,9 +646,14 @@ export default function OsPage() {
                 <div><div className="ci-label">Telegram канал</div><div className="ci-val">@sleepycoffeem</div></div>
                 <div className="ci-arrow">→</div>
               </a>
-              <a className="contact-item" href="https://linkedin.com/in/kozyrenko" target="_blank" rel="noopener noreferrer">
+              <a className="contact-item" href="https://www.linkedin.com/in/arti-k-renko/" target="_blank" rel="noopener noreferrer">
                 <div className="ci-icon">🔗</div>
-                <div><div className="ci-label">LinkedIn</div><div className="ci-val">linkedin.com/in/kozyrenko</div></div>
+                <div><div className="ci-label">LinkedIn</div><div className="ci-val">linkedin.com/in/arti-k-renko</div></div>
+                <div className="ci-arrow">→</div>
+              </a>
+              <a className="contact-item" href="https://github.com/Arti-Ko" target="_blank" rel="noopener noreferrer">
+                <div className="ci-icon">📚</div>
+                <div><div className="ci-label">GitHub</div><div className="ci-val">Github.com/Arti-Ko</div></div>
                 <div className="ci-arrow">→</div>
               </a>
               <div className="avail-block">

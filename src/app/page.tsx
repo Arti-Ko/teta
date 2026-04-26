@@ -269,48 +269,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ── SOCIAL PROOF ── */}
-      <section id="social-proof">
-        <div className="section-wrap">
-          <div className="reveal">
-            <div className="section-label">Рекомендации</div>
-            <h2 className="section-title">Что говорят коллеги</h2>
-          </div>
-          <div className="sp-grid">
-            {/* TODO: Вставьте реальную цитату из раздела рекомендаций LinkedIn */}
-            <blockquote className="sp-card sp-placeholder reveal d1">
-              <div className="sp-quote">&ldquo;</div>
-              <p className="sp-text">Вставьте цитату из рекомендации LinkedIn — 2–3 предложения от руководителя или коллеги. Это самый эффективный сигнал доверия для рекрутеров.</p>
-              <cite className="sp-cite">
-                <span className="sp-name">Имя Фамилия</span>
-                <span className="sp-role">Должность · Компания</span>
-              </cite>
-            </blockquote>
-            {/* TODO: Вставьте вторую цитату */}
-            <blockquote className="sp-card sp-placeholder reveal d2">
-              <div className="sp-quote">&ldquo;</div>
-              <p className="sp-text">Вторая рекомендация от другого коллеги или клиента. Лучше если это будет CTO, Product Owner или прямой руководитель.</p>
-              <cite className="sp-cite">
-                <span className="sp-name">Имя Фамилия</span>
-                <span className="sp-role">Должность · Компания</span>
-              </cite>
-            </blockquote>
-          </div>
-          <div className="sp-footer reveal d3">
-            <a
-              href="https://www.linkedin.com/in/kozyrenko"
-              className="sp-li-cta"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              💼 Все рекомендации на LinkedIn →
-            </a>
-            <span className="sp-hint">Рекомендации доступны в профиле</span>
-          </div>
-        </div>
-      </section>
-
+      
       {/* ── STACK ── */}
       <section id="stack">
         <div className="section-wrap">
@@ -374,7 +333,7 @@ export default function Home() {
           <div className="reveal">
             <div className="avail-pill"><div className="ap-dot" />Открыт к предложениям</div>
             <div className="section-label">Контакт</div>
-            <h2 className="section-title">Давайте&nbsp;поговорим</h2>
+            <h2 className="section-title">Поработаем&nbsp;вместе?</h2>
             <p className="section-desc">Ищу сложные проекты на стыке аналитики и системного проектирования: финтех, AI/ML, высоконагруженные платформы. Контракт или штат — рассматриваю оба формата. Отвечаю в течение 24 часов.</p>
           </div>
           <div className="contact-grid">
@@ -401,9 +360,9 @@ export default function Home() {
               <div><div className="cc-label">Telegram Канал</div><div className="cc-val">Заметки BA/SA · @sleepycoffeem</div></div>
               <div className="cc-arrow">→</div>
             </a>
-            <a className="contact-card reveal d3" href="https://www.linkedin.com/in/kozyrenko" target="_blank" rel="noopener noreferrer">
+            <a className="contact-card reveal d3" href="https://www.linkedin.com/in/arti-k-renko/" target="_blank" rel="noopener noreferrer">
               <div className="cc-icon" aria-hidden="true">💼</div>
-              <div><div className="cc-label">LinkedIn</div><div className="cc-val">linkedin.com/in/kozyrenko</div></div>
+              <div><div className="cc-label">LinkedIn</div><div className="cc-val">linkedin.com/in/arti-k-renko</div></div>
               <div className="cc-arrow">→</div>
             </a>
             <a className="contact-card reveal d3" href="https://github.com/Arti-Ko" target="_blank" rel="noopener noreferrer">
