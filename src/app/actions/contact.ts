@@ -17,7 +17,7 @@ export async function submitContact(
 
   if (!token || !chatId) {
     console.error("[contact] Missing env vars:", { token: !!token, chatId: !!chatId });
-    return { status: "success" };
+    return { status: "error", error: "Конфигурация сервера не завершена. Напишите напрямую: arti.k.renko@gmail.com" };
   }
 
   const text = `🆕 *Сообщение с портфолио*\n\n👤 ${name}\n📬 ${contact}\n\n💬 ${message}`;
