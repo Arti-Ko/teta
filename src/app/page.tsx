@@ -10,7 +10,7 @@ import ContactForm from "./_components/ContactForm";
 
 export const metadata: Metadata = {
   description:
-    "Senior Business Analyst с инженерным бэкграундом. Финтех (Т-Банк, Purrweb), AI/ML, SaaS. 4 кейса с измеримыми результатами. Открыт к предложениям.",
+    "Business Analyst с инженерным бэкграундом. Финтех (Т-Банк, Purrweb), AI/ML, SaaS. Открыт к предложениям.",
 };
 
 export default function Home() {
@@ -75,7 +75,7 @@ export default function Home() {
           <span className="hp-item active">Fullstack Analyst</span>
         </div>
         <p className="hero-sub reveal d2 visible">
-          <strong>Senior Business Analyst с инженерным бэкграундом.</strong> Проектирую AI-продукты,
+          <strong>Business Analyst с инженерным бэкграундом.</strong> Проектирую AI-продукты,
           финтех-системы и высоконагруженные платформы на стыке бизнеса и архитектуры.
         </p>
         <div className="hero-actions reveal d2 visible">
@@ -166,7 +166,6 @@ export default function Home() {
                 <span className="aic-tag">Remote / офис</span>
                 <span className="aic-tag">Штат / контракт</span>
                 <span className="aic-tag">MSK ±2ч</span>
-                <span className="aic-tag">English B2+</span>
               </div>
             </div>
           </div>

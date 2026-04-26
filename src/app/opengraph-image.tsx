@@ -22,7 +22,7 @@ export default function Image() {
         <div style={{ display: "flex", alignItems: "center", marginBottom: "32px" }}>
           <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF3B2E", marginRight: "12px", display: "flex" }} />
           <span style={{ color: "#FF3B2E", fontSize: "14px", letterSpacing: "6px" }}>
-            SENIOR BUSINESS ANALYST
+            BUSINESS ANALYST
           </span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", marginBottom: "24px" }}>
