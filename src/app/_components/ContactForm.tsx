@@ -42,6 +42,9 @@ export default function ContactForm() {
         rows={4}
         className="cf-input cf-textarea"
       />
+      {state?.status === "error" && state.error && (
+        <p className="cf-error">{state.error}</p>
+      )}
       <button type="submit" className="btn btn-primary cf-submit" disabled={pending}>
         {pending ? "Отправляю..." : "Отправить →"}
       </button>
