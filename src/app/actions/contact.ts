@@ -23,7 +23,8 @@ export async function submitContact(
       });
     } catch { /* silent fail */ }
   }
-console.log("token exists:", !!process.env.TELEGRAM_BOT_TOKEN);
-console.log("chatId exists:", !!process.env.TELEGRAM_CHAT_ID);
+
   return { status: "success" };
 }
+console.log("token exists:", !!process.env.TELEGRAM_BOT_TOKEN);
+console.log("chatId exists:", !!process.env.TELEGRAM_CHAT_ID);
