@@ -410,6 +410,11 @@ export default function OsPage() {
 
   return (
     <div className="os-root">
+      <div className="os-mobile-warn">
+        <div className="os-mobile-warn-icon">🖥️</div>
+        <p>ARTI.OS требует десктопного браузера.<br />Откройте с компьютера для полного опыта.</p>
+        <a href="/">← Вернуться к портфолио</a>
+      </div>
       <canvas ref={canvasRef} className="os-canvas" />
 
       {/* Boot */}
@@ -448,10 +453,10 @@ export default function OsPage() {
           </div>
           <div className="mb-right">
             <div className="mb-stat"><div className="dot" />AVAILABLE</div>
-            <button className="mb-theme-btn" onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>
+            <button className="mb-theme-btn" onClick={() => setTheme(t => t === "dark" ? "light" : "dark")} suppressHydrationWarning>
               {theme === "dark" ? "☀" : "◑"}
             </button>
-            <div className="mb-clock">{clock}</div>
+            <div className="mb-clock" suppressHydrationWarning>{clock}</div>
           </div>
         </div>
 

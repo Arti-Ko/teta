@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { DM_Sans, Space_Mono, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { DM_Sans, Space_Mono, Space_Grotesk, Noto_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -14,6 +14,13 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const notoSans = Noto_Sans({
+  subsets: ["cyrillic", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-noto-sans",
+  display: "swap",
+});
+
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -22,11 +29,18 @@ const spaceMono = Space_Mono({
 });
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-space-grotesk",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F7F6F2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0F0E" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -44,6 +58,7 @@ export const metadata: Metadata = {
     siteName: "Артем Козыренко",
     title: "Артем Козыренко — Senior Business Analyst",
     description: "Senior BA. Финтех, AI/ML, SaaS-платформы. 4+ года, 15+ проектов.",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Артем Козыренко — Senior Business Analyst" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -58,6 +73,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${siteUrl}/#person`,
   name: "Артем Козыренко",
   jobTitle: "Senior Business Analyst",
   url: siteUrl,
@@ -78,10 +94,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="ru"
-      className={`${dmSans.variable} ${spaceMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${spaceMono.variable} ${spaceGrotesk.variable} ${notoSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <head>
-        <meta name="theme-color" content="#F7F6F2" />
         {/* Prevent flash-of-wrong-theme by reading localStorage before first paint */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();` }} />
         <script
