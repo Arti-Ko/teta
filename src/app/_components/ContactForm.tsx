@@ -1,12 +1,41 @@
 "use client";
 
-import { useActionState } from "react";
-import { submitContact } from "../actions/contact";
+import { useState } from "react";
+
+type State = { status: "idle" | "pending" | "success" | "error"; error?: string };
 
 export default function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitContact, null);
+  const [state, setState] = useState<State>({ status: "idle" });
 
-  if (state?.status === "success") {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setState({ status: "pending" });
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      contact: (form.elements.namedItem("contact") as HTMLInputElement).value.trim(),
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim(),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (json.status === "success") {
+        setState({ status: "success" });
+      } else {
+        setState({ status: "error", error: json.error ?? "Что-то пошло не так" });
+      }
+    } catch {
+      setState({ status: "error", error: "Нет соединения. Напишите напрямую на email." });
+    }
+  }
+
+  if (state.status === "success") {
     return (
       <div className="cf-success">
         <div className="cf-success-icon">✓</div>
@@ -16,7 +45,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="contact-form">
+    <form onSubmit={handleSubmit} className="contact-form">
       <div className="cf-row">
         <input
           name="name"
@@ -25,6 +54,7 @@ export default function ContactForm() {
           required
           className="cf-input"
           autoComplete="name"
+          disabled={state.status === "pending"}
         />
         <input
           name="contact"
@@ -33,6 +63,7 @@ export default function ContactForm() {
           required
           className="cf-input"
           autoComplete="email"
+          disabled={state.status === "pending"}
         />
       </div>
       <textarea
@@ -41,12 +72,17 @@ export default function ContactForm() {
         required
         rows={4}
         className="cf-input cf-textarea"
+        disabled={state.status === "pending"}
       />
-      {state?.status === "error" && state.error && (
+      {state.status === "error" && state.error && (
         <p className="cf-error">{state.error}</p>
       )}
-      <button type="submit" className="btn btn-primary cf-submit" disabled={pending}>
-        {pending ? "Отправляю..." : "Отправить →"}
+      <button
+        type="submit"
+        className="btn btn-primary cf-submit"
+        disabled={state.status === "pending"}
+      >
+        {state.status === "pending" ? "Отправляю..." : "Отправить →"}
       </button>
     </form>
   );
